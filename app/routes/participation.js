@@ -20,7 +20,7 @@ const baseUrl = "/" + config.api.prefix + config.api.version + "participations";
 module.exports = (app) => {
 
 	// Admin
-	app.route(baseUrl).get(ProfileSecurity, MethodSecurity.read, PermissionsSecurity, participationController.getParticipationItems);
+	app.route(baseUrl).get(ProfileSecurity, MethodSecurity.read, PermissionsSecurity, participationController.getAllParticipations);
 	app.route(baseUrl + "/:uuid/applications").get(ProfileSecurity, MethodSecurity.read, PermissionsSecurity, participationController.getByParticipation);
 
 	app.route(baseUrl + "/applications/:uuid/check").put(ProfileSecurity, MethodSecurity.read, PermissionsSecurity, participationController.check);

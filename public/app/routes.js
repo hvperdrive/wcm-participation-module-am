@@ -5,15 +5,15 @@
 		.config([
 
 			"$stateProvider",
-			"participationConfigProvider",
+			"participationsConfigProvider",
 
-			function($stateProvider, participationConfigProvider) {
+			function($stateProvider, participationsConfigProvider) {
 
-				var moduleFolder = participationConfigProvider.API.modulePath;
+				var moduleFolder = participationsConfigProvider.API.modulePath;
 
 				$stateProvider
 
-					.state("pelorus.participations.index", {
+					.state("pelorus.wcm-participation.index", {
 						url: "",
 						access: {
 							requiresLogin: true,
@@ -34,7 +34,7 @@
 						},
 					})
 
-					.state("pelorus.participations.edit", {
+					.state("pelorus.wcm-participation.edit", {
 						url: "/{uuid}",
 						access: {
 							requiresLogin: true,
@@ -59,7 +59,7 @@
 								templateUrl: "/app/core/resource/views/resource.html",
 								controller: "participationsDetailController",
 							},
-							"form@pelorus.participations.edit": {
+							"form@pelorus.wcm-participation.edit": {
 								templateUrl: moduleFolder + "views/detail.html",
 							},
 						},

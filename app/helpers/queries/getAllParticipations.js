@@ -2,9 +2,9 @@
 
 const path = require("path");
 
-const ContentModel = require(path.join(process.cwd(), "/models/content"));
+const ContentModel = require(path.join(process.cwd(), "/app/models/content"));
 
-const variables = require("../helpers/variables");
+const variables = require("../variables");
 
 module.exports = () => ContentModel.find({
 	"meta.deleted": false,

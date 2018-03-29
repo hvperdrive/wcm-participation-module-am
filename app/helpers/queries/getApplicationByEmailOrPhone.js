@@ -1,14 +1,16 @@
 "use strict";
 
-const ParticipationApplication = require("../models/participationApplication");
+const R = require("ramda");
+
+const ParticipationApplication = require("../../models/participationApplication");
 
 module.exports = (email, phone) => ParticipationApplication.find({
 	"$or": [
 		{ "data.email": email },
 		{
 			"$and": [
-				{ "data.phone.number": phone.number },
-				{ "data.phone.selectedCountry.dialCode": phone.selectedCountry.dialCode },
+				{ "data.phone.number": R.pathOr(undefined, ["number"])(phone) },
+				{ "data.phone.selectedCountry.dialCode": R.pathOr(undefined, ["selectedCountry", "dialCode"])(phone) },
 			],
 		},
 	],

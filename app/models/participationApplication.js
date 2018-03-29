@@ -1,11 +1,11 @@
-let mongoose = require("mongoose");
-let Schema = mongoose.Schema;
-let uuid = require("node-uuid");
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
+const uuid = require("node-uuid");
 
-delete mongoose.models.participationApplications;
-delete mongoose.modelSchemas.participationApplications;
+delete mongoose.models.ParticipationApplications;
+delete mongoose.modelSchemas.ParticipationApplications;
 
-let ParticipationApplicationsSchema = new Schema({
+const ParticipationApplicationsSchema = new Schema({
 	uuid: {
 		type: String,
 		default: uuid,
@@ -68,4 +68,4 @@ let ParticipationApplicationsSchema = new Schema({
 
 // Set the name of the collection
 ParticipationApplicationsSchema.set("collection", "participationApplications");
-module.exports = mongoose.model("participationApplications", ParticipationApplicationsSchema);
+module.exports = mongoose.model("ParticipationApplications", ParticipationApplicationsSchema);

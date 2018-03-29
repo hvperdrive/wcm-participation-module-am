@@ -2,7 +2,6 @@
 
 const R = require("ramda");
 
-
 module.exports = (body, participationId) => {
 	const pathOrFromBody = (fallback, path) => R.pathOr(fallback, path, body);
 
