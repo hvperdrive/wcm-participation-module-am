@@ -1,66 +1,69 @@
 "use strict";
 
 (function(angular) {
-	angular.module("wcm-boilerplate_0.0.1")
+	angular.module("wcm-participation_0.0.1")
 		.config([
 
 			"$stateProvider",
-			"boilerplateConfigProvider",
+			"participationConfigProvider",
 
-			function ($stateProvider, boilerplateConfigProvider) {
+			function($stateProvider, participationConfigProvider) {
 
-				var moduleFolder = boilerplateConfigProvider.API.modulePath;
+				var moduleFolder = participationConfigProvider.API.modulePath;
 
 				$stateProvider
 
-					.state("pelorus.wcm-boilerplate.index", {
+					.state("pelorus.participations.index", {
 						url: "",
 						access: {
-							requiresLogin: true
+							requiresLogin: true,
 						},
 						resolve: {
-							ListData: ["boilerplateFactory", function(boilerplateFactory) {
-								return boilerplateFactory.get({ id: "public" }).$promise;
+							ListData: ["participationsFactory", function(participationsFactory) {
+								return participationsFactory.query().$promise;
 							}],
 						},
 						ncyBreadcrumb: {
-							label: "{{breadcrumb}}"
+							label: "{{breadcrumb}}",
 						},
 						views: {
 							"": {
 								templateUrl: moduleFolder + "views/overview.html",
-								controller: "boilerplateOverviewController"
-							}
-						}
+								controller: "participationsOverviewController",
+							},
+						},
 					})
 
-					.state("pelorus.wcm-boilerplate.edit", {
+					.state("pelorus.participations.edit", {
 						url: "/{uuid}",
 						access: {
-							requiresLogin: true
+							requiresLogin: true,
 						},
 						resolve: {
-							InstanceData: ["boilerplateFactory", "$stateParams", function(boilerplateFactory, $stateParams) {
-								if ($stateParams.uuid && $stateParams.uuid !== "new") {
-									return boilerplateFactory.get({ id: $stateParams.uuid }).$promise;
+							InstanceData: ["contentFactory", "$stateParams", function(contentFactory, $stateParams) {
+								return contentFactory.get({ uuid: $stateParams.uuid }).$promise;
+							}],
+							ListData: ["participationsFactory", "$stateParams", function(participationsFactory, $stateParams) {
+								if ($stateParams.uuid) {
+									return participationsFactory.query({ uuid: $stateParams.uuid }).$promise;
 								} else {
-									return {};
+									return [];
 								}
 							}],
 						},
 						ncyBreadcrumb: {
-							label: "{{breadcrumb}}"
+							label: "{{breadcrumb}}",
 						},
 						views: {
 							"": {
 								templateUrl: "/app/core/resource/views/resource.html",
-								controller: "boilerplateDetailController"
+								controller: "participationsDetailController",
 							},
-							"form@pelorus.wcm-boilerplate.edit": {
-								templateUrl: moduleFolder + "views/detail.html"
-							}
-						}
+							"form@pelorus.participations.edit": {
+								templateUrl: moduleFolder + "views/detail.html",
+							},
+						},
 					});
-			}
+			},
 		]);
 })(window.angular);

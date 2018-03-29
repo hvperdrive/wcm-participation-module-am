@@ -1,3 +1,3 @@
 module.exports = () => ({
-	status: "Exposed method ok"
+	status: "Exposed method ok",
 });

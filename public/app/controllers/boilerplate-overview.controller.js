@@ -1,8 +1,8 @@
 "use strict";
 
 (function(angular) {
-	angular.module("wcm-boilerplate_0.0.1.controllers")
-		.controller("boilerplateOverviewController", [
+	angular.module("wcm-participation_0.0.1.controllers")
+		.controller("participationsOverviewController", [
 
 			"$scope",
 			"$controller",
@@ -14,7 +14,7 @@
 			// Resolves
 			"ListData",
 
-			function ($scope, $controller, constants, LabelService, ListData) {
+			function($scope, $controller, constants, LabelService, ListData) {
 
 				$scope.data = ListData.data || [];
 
@@ -25,18 +25,18 @@
 						placeholder: LabelService.getString("Search"),
 						style: {
 							override: true,
-							className: "c-input-text c-input-text--sm u-width-4-6 fr"
-						}
+							className: "c-input-text c-input-text--sm u-width-4-6 fr",
+						},
 					},
 					columns: [{
 						columnName: LabelService.getString("Name"),
 						key: "name",
-						sortable: true
+						sortable: true,
 					}, {
 						columnName: LabelService.getString("Actions"),
-						template: '<a ui-sref="^.edit({uuid:i.uuid})">' + LabelService.getString("Edit") + "</a>"
-					}]
+						template: '<a ui-sref="^.edit({uuid:i.uuid})">' + LabelService.getString("Edit") + "</a>",
+					}],
 				};
-			}
+			},
 		]);
 })(window.angular);

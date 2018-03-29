@@ -12,7 +12,7 @@ const onConfigurationChanged = () => {
 };
 
 module.exports.handleHooks = (hooks) => {
-	var myHooks = {
+	let myHooks = {
 		onLoadComplete: onLoadComplete,
 		onConfigurationChanged: onConfigurationChanged,
 	};
