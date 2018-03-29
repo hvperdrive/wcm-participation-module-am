@@ -1,23 +1,23 @@
 "use strict";
 
 (function(angular) {
-	angular.module("wcm-participation_0.0.2.factories", []);
-	angular.module("wcm-participation_0.0.2.services", ["wcm-participation_0.0.2.factories"]);
-	angular.module("wcm-participation_0.0.2.controllers", ["wcm-participation_0.0.2.services"]);
-	angular.module("wcm-participation_0.0.2.directives", ["wcm-participation_0.0.2.controllers"]);
+	angular.module("wcm-participation_0.0.3.factories", []);
+	angular.module("wcm-participation_0.0.3.services", ["wcm-participation_0.0.3.factories"]);
+	angular.module("wcm-participation_0.0.3.controllers", ["wcm-participation_0.0.3.services"]);
+	angular.module("wcm-participation_0.0.3.directives", ["wcm-participation_0.0.3.controllers"]);
 
-	angular.module("wcm-participation_0.0.2", [
+	angular.module("wcm-participation_0.0.3", [
 
 		"pelorus.services",
 
-		"wcm-participation_0.0.2.factories",
-		"wcm-participation_0.0.2.services",
-		"wcm-participation_0.0.2.controllers",
-		"wcm-participation_0.0.2.directives",
+		"wcm-participation_0.0.3.factories",
+		"wcm-participation_0.0.3.services",
+		"wcm-participation_0.0.3.controllers",
+		"wcm-participation_0.0.3.directives",
 
 	])
-	.run([function() {
-		console.log("Participation module is loaded and available!"); // eslint-disable-line no-console
-	}]);
+		.run([function() {
+			console.log("Participation module is loaded and available!"); // eslint-disable-line no-console
+		}]);
 })(window.angular);
 
