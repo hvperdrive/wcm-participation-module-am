@@ -1,7 +1,7 @@
 "use strict";
 
 (function(angular) {
-	angular.module("wcm-participation_0.0.1.controllers")
+	angular.module("wcm-participation_0.0.2.controllers")
 		.controller("participationsOverviewController", [
 
 			"$scope",
@@ -16,7 +16,7 @@
 
 			function($scope, $controller, constants, LabelService, ListData) {
 
-				$scope.data = ListData.data || [];
+				$scope.data = ListData || [];
 
 				$scope.tableConfig = {
 					pagination: constants.pagination,
@@ -30,11 +30,19 @@
 					},
 					columns: [{
 						columnName: LabelService.getString("Name"),
-						key: "name",
+						key: "meta.label",
+						sortable: true,
+					}, {
+						columnName: LabelService.getString("Begin date"),
+						template: "<span>{{i.fields.beginDate | date: 'dd/MM/yyyy HH:mm'}}</span>",
+						sortable: true,
+					}, {
+						columnName: LabelService.getString("End date"),
+						template: "<span>{{i.fields.endDate | date: 'dd/MM/yyyy HH:mm'}}</span>",
 						sortable: true,
 					}, {
 						columnName: LabelService.getString("Actions"),
-						template: '<a ui-sref="^.edit({uuid:i.uuid})">' + LabelService.getString("Edit") + "</a>",
+						template: '<a ui-sref="^.edit({uuid:i.uuid})">' + LabelService.getString("open") + "</a>",
 					}],
 				};
 			},

@@ -1,11 +1,20 @@
 <div class="content--inner">
 
 	<h1 class="c-page-title">
-		<span translate>Edit</span>
+		<span translate>Applications for</span>
+		<i>{{itemData.meta.label}}</i>
 	</h1>
 
-	<div ng-form name="resourceForms.itemForm">
-		<span class="customClass">Something with custom styling from the module as an example</span>
-	</div>
+	<div ng-form name="resourceForms.metaForm" role="form">
 
+		<fieldset class="c-form__fieldset">
+			<legend class="c-form__fieldset__legend" translate>Participation info</legend>
+
+			<div class="c-form__fieldset__content u-clear">
+
+			</div>
+		</fieldset>
+
+		<d01-table source="data" config="tableConfig"></d01-table>
+	</div>
 </div>

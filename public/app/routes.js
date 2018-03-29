@@ -1,7 +1,7 @@
 "use strict";
 
 (function(angular) {
-	angular.module("wcm-participation_0.0.1")
+	angular.module("wcm-participation_0.0.2")
 		.config([
 
 			"$stateProvider",
@@ -45,7 +45,7 @@
 							}],
 							ListData: ["participationsFactory", "$stateParams", function(participationsFactory, $stateParams) {
 								if ($stateParams.uuid) {
-									return participationsFactory.query({ uuid: $stateParams.uuid }).$promise;
+									return participationsFactory.query({ docController: "applications", id: $stateParams.uuid }).$promise;
 								} else {
 									return [];
 								}
