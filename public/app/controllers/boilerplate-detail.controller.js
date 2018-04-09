@@ -50,6 +50,10 @@
 						template: "<span>{{i.data.optIns.reminder ? 'true' : 'false'}}</span>",
 						sortable: true,
 					}, {
+						columnName: LabelService.getString("Processed"),
+						template: "<input type=\"checkbox\" ng-model=\"i.meta.checked\" ng-change=\"parent.updateCheck(i.uuid, i.meta.checked)\" />",
+						sortable: true,
+					}, {
 						columnName: LabelService.getString("Actions"),
 						template: "<a >" + LabelService.getString("open") + "</a>",
 					}],
@@ -60,6 +64,16 @@
 
 				// ResourceView configuration
 				$scope.context.type = LabelService.getString("Participations"); // Set the current type to "Member"
+
+				$scope.updateCheck = function(uuid, checked) {
+					var docController = "uncheck";
+
+					if (checked) {
+						docController = "check";
+					}
+
+					participationsFactory.patch({ listController: "applications", uuid: uuid, docController: docController });
+				};
 
 				// $scope events
 				$scope.$on("$destroy", function() {

@@ -57,7 +57,7 @@ module.exports.check = (req, res) => {
 		return res.status(400).json({ message: "No uuid param passed" });
 	}
 
-	return queries.toggleCheck(req.params.uuid, true)
+	return queries.toggleApplicationChecked(req.params.uuid, true)
 		.then(() => res.status(200).json({ message: "Success" }))
 		.catch((error) => sendErrorResult(res, error));
 };
@@ -67,7 +67,7 @@ module.exports.uncheck = (req, res) => {
 		return res.status(400).json({ message: "No uuid param passed" });
 	}
 
-	return queries.toggleCheck(req.params.uuid, false)
+	return queries.toggleApplicationChecked(req.params.uuid, false)
 		.then(() => res.status(200).json({ message: "Success" }))
 		.catch((error) => sendErrorResult(res, error));
 };

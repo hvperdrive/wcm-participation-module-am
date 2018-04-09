@@ -30,19 +30,23 @@
 					},
 					columns: [{
 						columnName: LabelService.getString("Name"),
-						key: "meta.label",
+						key: "participation.meta.label",
 						sortable: true,
 					}, {
 						columnName: LabelService.getString("Begin date"),
-						template: "<span>{{i.fields.beginDate | date: 'dd/MM/yyyy HH:mm'}}</span>",
+						template: "<span>{{i.participation.fields.beginDate | date: 'dd/MM/yyyy HH:mm'}}</span>",
 						sortable: true,
 					}, {
 						columnName: LabelService.getString("End date"),
-						template: "<span>{{i.fields.endDate | date: 'dd/MM/yyyy HH:mm'}}</span>",
+						template: "<span>{{i.participation.fields.endDate | date: 'dd/MM/yyyy HH:mm'}}</span>",
+						sortable: true,
+					}, {
+						columnName: LabelService.getString("Applicants"),
+						key: "applications.length",
 						sortable: true,
 					}, {
 						columnName: LabelService.getString("Actions"),
-						template: '<a ui-sref="^.edit({uuid:i.uuid})">' + LabelService.getString("open") + "</a>",
+						template: '<a ui-sref="^.edit({uuid:i.participation.uuid})">' + LabelService.getString("open") + "</a>",
 					}],
 				};
 			},

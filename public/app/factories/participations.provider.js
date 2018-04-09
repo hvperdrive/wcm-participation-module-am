@@ -12,13 +12,16 @@
 				var api = configuration.serverPath + configuration.apiPrefix + configuration.apiLevel;
 				var factory = {};
 
-				factory = $resource(api + "participations/:listController:id/:docController", {
+				factory = $resource(api + "participations/:listController/:id/:docController", {
 					id: "@uuid",
 					listController: "@listController",
 					docController: "@docController",
 				}, {
 					update: {
 						method: "PUT",
+					},
+					patch: {
+						method: "PATCH",
 					},
 				});
 
