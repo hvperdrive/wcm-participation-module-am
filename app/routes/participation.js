@@ -22,6 +22,7 @@ module.exports = (app) => {
 	// Admin
 	app.route(baseUrl).get(ProfileSecurity, MethodSecurity.read, PermissionsSecurity, participationController.getAllParticipations);
 	app.route(baseUrl + "/:uuid/applications").get(ProfileSecurity, MethodSecurity.read, PermissionsSecurity, participationController.getByParticipation);
+	app.route(baseUrl + "/:uuid/applications/export").get(ProfileSecurity, MethodSecurity.read, PermissionsSecurity, participationController.export);
 
 	app.route(baseUrl + "/applications/:uuid/check").patch(ProfileSecurity, MethodSecurity.read, PermissionsSecurity, participationController.check);
 	app.route(baseUrl + "/applications/:uuid/uncheck").patch(ProfileSecurity, MethodSecurity.read, PermissionsSecurity, participationController.uncheck);

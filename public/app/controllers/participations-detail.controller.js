@@ -69,7 +69,7 @@
 				// ResourceView configuration
 				$scope.context.type = LabelService.getString("Participations"); // Set the current type to "Member"
 
-				$scope.updateCheck = function(uuid, checked) {
+				$scope.updateCheck = function updateCheck(uuid, checked) {
 					var docController = "uncheck";
 
 					if (checked) {
@@ -77,6 +77,10 @@
 					}
 
 					participationsFactory.patch({ listController: "applications", uuid: uuid, docController: docController });
+				};
+
+				$scope.exportToExcel = function exportToExcel() {
+					participationsFactory.get({ listController: "applications", uuid: InstanceData.uuid, docController: "export" });
 				};
 
 				// $scope events

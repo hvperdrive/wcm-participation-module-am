@@ -81,3 +81,18 @@ module.exports.remove = (req, res) => {
 		.then(() => res.status(200).json({ message: "Success" }))
 		.catch((error) => sendErrorResult(res, error));
 };
+
+module.exports.export = (req, res) => {
+	if (!req.params.uuid) {
+		return res.status(400).json({ message: "No uuid param passed" });
+	}
+
+	return queries.getParticipationId(req.params.uuid)
+		.then((participationId) => queries.getApplicationsByParticipationId(participationId))
+		.then((applications) => mappers.toExcel(applications))
+		.then((result) => {
+			res.attachment("report.xlsx");
+			res.status(200).json(result);
+		})
+		.catch((error) => sendErrorResult(res, error));
+};

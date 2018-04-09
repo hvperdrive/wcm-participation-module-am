@@ -47,8 +47,8 @@ const ParticipationApplicationsSchema = new Schema({
 	},
 	meta: {
 		checked: {
-            type: Boolean,
-            default: false,
+			type: Boolean,
+			default: false,
 		},
 		deleted: {
 			type: Boolean,
