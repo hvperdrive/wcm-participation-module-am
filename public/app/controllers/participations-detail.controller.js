@@ -5,7 +5,9 @@
 		.controller("participationsDetailController", [
 			"$scope",
 			"$controller",
+			"$window",
 			"constants",
+			"configuration",
 
 			// Services
 			"LabelService",
@@ -17,7 +19,7 @@
 			"InstanceData",
 			"ListData",
 
-			function($scope, $controller, constants, LabelService, participationsFactory, InstanceData, ListData) {
+			function($scope, $controller, $window, constants, configuration, LabelService, participationsFactory, InstanceData, ListData) {
 
 				// Referencing the required factory
 				$scope._factory = participationsFactory;
@@ -80,7 +82,12 @@
 				};
 
 				$scope.exportToExcel = function exportToExcel() {
-					participationsFactory.get({ listController: "applications", uuid: InstanceData.uuid, docController: "export" });
+					$window.location.href = configuration.serverPath +
+						configuration.apiPrefix +
+						configuration.apiLevel +
+						"participations/" +
+						InstanceData.uuid +
+						"/applications/export";
 				};
 
 				// $scope events

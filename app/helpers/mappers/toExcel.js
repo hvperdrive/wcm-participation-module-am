@@ -21,21 +21,8 @@ const STYLES = {
 			underline: true,
 		},
 	},
-	cell: {
-		fill: {
-			fgColor: {
-				rgb: "FFFFFFFF",
-			},
-		},
-	},
+	cell: {},
 };
-
-const HEADING = [
-	[
-		[{ value: "a1", style: STYLES.header }, { value: "b1", style: STYLES.header }, { value: "c1", style: STYLES.header }],
-		["a2", "b2", "c2"],
-	],
-];
 
 const SPECIFICATION = {
 	i: {
@@ -47,24 +34,34 @@ const SPECIFICATION = {
 		displayName: "Email",
 		headerStyle: STYLES.header,
 		cellStyle: STYLES.cell,
+		width: "50",
 	},
 	tel: {
 		displayName: "Tel.",
 		headerStyle: STYLES.header,
 		cellStyle: STYLES.cell,
+		width: "20",
+	},
+	created: {
+		displayName: "Applied on",
+		headerStyle: STYLES.header,
+		cellStyle: STYLES.cell,
+		width: "20",
 	},
 };
 
 module.exports = (applications) => R.compose(
 	(dataset) => excel.buildExport([{
 		name: "Report",
-		heading: HEADING,
 		specification: SPECIFICATION,
 		data: dataset,
 	}]),
 	mapIndexed((app, i) => ({
-		i,
+		i: i + 1,
 		email: R.pathOr("", ["data", "email"])(app),
-		tel: R.pathOr("", ["phone", "number"])(app),
+		tel: R.pathOr(false, ["data", "phone", "number"])(app) ?
+			R.pathOr("", ["data", "phone", "selectedCountry", "dialCode"])(app) + " " + R.pathOr("", ["data", "phone", "number"])(app) :
+			"",
+		created: R.pathOr("", ["meta", "created"])(app),
 	}))
 )(applications);

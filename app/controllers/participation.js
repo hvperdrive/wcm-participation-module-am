@@ -91,8 +91,9 @@ module.exports.export = (req, res) => {
 		.then((participationId) => queries.getApplicationsByParticipationId(participationId))
 		.then((applications) => mappers.toExcel(applications))
 		.then((result) => {
-			res.attachment("report.xlsx");
-			res.status(200).json(result);
+			res.set("Content-Disposition", "attachment;filename=report.xlsx");
+			res.set("Content-Type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+			res.status(200).send(result);
 		})
 		.catch((error) => sendErrorResult(res, error));
 };
