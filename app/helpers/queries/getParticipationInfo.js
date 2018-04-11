@@ -6,12 +6,12 @@ const ContentModel = require(path.join(process.cwd(), "/app/models/content"));
 
 const variables = require("../variables");
 
-module.exports = (uuid) => ContentModel.findOne({
-	uuid: uuid,
+module.exports = (id) => ContentModel.findOne({
+	_id: id,
 	"meta.deleted": false,
 	"meta.published": true,
 	"meta.contentType": variables.get().participationId,
-}, { "meta.contentType": 1, "_id": 1 })
+}, { "versions": 0 })
 	.lean()
 	.exec()
 	.then((participationItem) => {

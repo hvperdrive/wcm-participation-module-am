@@ -8,6 +8,7 @@ const ParticipationApplication = require("../models/participationApplication");
 const validators = require("../helpers/validators");
 const mappers = require("../helpers/mappers");
 const queries = require("../helpers/queries");
+const mailHelper = require("../helpers/mail");
 
 const sendErrorResult = (res, error) => {
 	// Handle custom error
@@ -31,6 +32,8 @@ module.exports.apply = (req, res) => {
 		.then((application) => validators.userIsRegistered(application))
 		.then((result) => result.isRegistered ? Q.reject({ status: 409, message: "User already defined" }) : result.data)
 		.then((application) => ParticipationApplication.create(application))
+		.then((application) => mailHelper.prepareConfirm(application))
+		.then((mailOptions) => mailOptions ? mailHelper.send(mailOptions.to, mailOptions.subject, mailOptions.template, mailOptions.data) : Q.when())
 		.then(() => res.status(200).json({ message: "Success" }))
 		.catch((error) => sendErrorResult(res, error));
 };
