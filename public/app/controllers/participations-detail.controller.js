@@ -1,7 +1,7 @@
 "use strict";
 
 (function(angular) {
-	angular.module("wcm-participation_0.0.5.controllers")
+	angular.module("wcm-participation_0.0.6.controllers")
 		.controller("participationsDetailController", [
 			"$scope",
 			"$controller",
@@ -53,7 +53,7 @@
 						sortable: true,
 					}, {
 						columnName: LabelService.getString("Date"),
-						key: "<span>{{i.meta.created | date: 'dd/MM/yyyy HH:mm'}}</span>",
+						template: "<span>{{i.meta.created | date: 'dd/MM/yyyy HH:mm'}}</span>",
 						sortable: true,
 					}, {
 						columnName: LabelService.getString("Processed"),
@@ -72,7 +72,7 @@
 				$scope.context.type = LabelService.getString("Participations"); // Set the current type to "Member"
 
 				$scope.updateCheck = function updateCheck(uuid, checked) {
-					var docController = "uncheck";
+					let docController = "uncheck";
 
 					if (checked) {
 						docController = "check";
