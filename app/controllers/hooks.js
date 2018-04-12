@@ -1,18 +1,17 @@
 "use strict";
 
 const variablesHelper = require("../helpers/variables");
+const mail = require("../helpers/mail");
 
 const onLoadComplete = () => {
-	// Initiate passport strategies
 	variablesHelper.reload();
 };
 const onConfigurationChanged = () => {
-	// Initiate passport strategies
-	variablesHelper.reload();
+	variablesHelper.reload().then((variables) => mail.sendBulk.resetPool(variables));
 };
 
 module.exports.handleHooks = (hooks) => {
-	let myHooks = {
+	const myHooks = {
 		onLoadComplete: onLoadComplete,
 		onConfigurationChanged: onConfigurationChanged,
 	};

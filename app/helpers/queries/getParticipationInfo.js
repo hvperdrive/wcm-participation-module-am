@@ -24,5 +24,5 @@ module.exports = (id) => ContentModel.findOne({
 		}
 
 		// Map the body to a valid participationApplication model
-		return participationItem._id;
+		return participationItem;
 	});
