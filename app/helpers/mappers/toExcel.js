@@ -48,6 +48,12 @@ const SPECIFICATION = {
 		cellStyle: STYLES.cell,
 		width: "20",
 	},
+	cancelOptIn: {
+		displayName: "Notify on cancel",
+		headerStyle: STYLES.header,
+		cellStyle: STYLES.cell,
+		width: "20",
+	},
 };
 
 module.exports = (applications) => R.compose(
@@ -57,11 +63,12 @@ module.exports = (applications) => R.compose(
 		data: dataset,
 	}]),
 	mapIndexed((app, i) => ({
-		i: i + 1,
+		i: 1 + i,
 		email: R.pathOr("", ["data", "email"])(app),
 		tel: R.pathOr(false, ["data", "phone", "number"])(app) ?
 			R.pathOr("", ["data", "phone", "selectedCountry", "dialCode"])(app) + " " + R.pathOr("", ["data", "phone", "number"])(app) :
 			"",
 		created: R.pathOr("", ["meta", "created"])(app),
+		cancelOptIn: R.pathOr("", ["data", "optIns", "cancel"])(app) ? "true" : "false",
 	}))
 )(applications);

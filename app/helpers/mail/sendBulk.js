@@ -67,6 +67,10 @@ module.exports = (arrMailData) => {
 };
 
 const initPool = module.exports.initPool = module.exports.resetPool = () => {
+	if (!R.pathOr(false, ["email", "variables", "host"])(variables.get())) {
+		return;
+	}
+
 	if (transporter) {
 		transporter.close();
 		transporter = null;
