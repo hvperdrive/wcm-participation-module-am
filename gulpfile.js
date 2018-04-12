@@ -2,7 +2,6 @@
 
 let gulp = require("gulp");
 let apidocSwagger = require("gulp-apidoc-swagger");
-let runSequence = require("run-sequence");
 let angularTemplatecache = require("gulp-angular-templatecache");
 let replace = require("gulp-replace");
 let fs = require("fs");
@@ -32,7 +31,7 @@ gulp.task("templateCache", function() {
 });
 
 // Utility function for bumping the version at the desired level in the package.json file.
-let bumpVersion = function bumpVersion(level) {
+const bumpVersion = function bumpVersion(level) {
 	let versionArr = packageConfig.version.split(".");
 
 	versionArr[level] = "" + (parseInt(versionArr[level]) + 1);
@@ -48,61 +47,31 @@ let bumpVersion = function bumpVersion(level) {
 	return packageConfig.version;
 };
 
-let bumpAngularModuleVersion = function bumpAngularModuleVersion(version) {
-	let reg = new RegExp("\"" + packageConfig.wcmModule.moduleConfig.angularModule + "_[0-9]{1,}\\.[0-9]{1,}\\.[0-9]{1,}", "g");
-	let reg2 = new RegExp("version: \"[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}\",", "g");
+const bumpAngularModuleVersion = function bumpAngularModuleVersion(version) {
+	const reg = new RegExp("\"" + packageConfig.wcmModule.moduleConfig.angularModule + "_[0-9]{1,}\\.[0-9]{1,}\\.[0-9]{1,}", "g");
+	const reg2 = new RegExp("version: \"[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}\",", "g");
 
 	return gulp.src(["./public/app/**/*.js"])
 		.pipe(replace(reg, "\"" + packageConfig.wcmModule.moduleConfig.angularModule + "_" + version))
 		.pipe(replace(reg2, "version: \"" + version + "\","))
 		.pipe(gulp.dest("./public/app"));
-
 };
 
 // Bump patch version (x.x.[patch version])
-gulp.task("bumpPatchVersion", function() {
+gulp.task("bumpPatch", function() {
 	let newVersion = bumpVersion(2);
 
 	return bumpAngularModuleVersion(newVersion);
 });
 // Bump minor version(x.[minor version].x)
-gulp.task("bumpMinorVersion", function() {
+gulp.task("bumpMinor", function() {
 	let newVersion = bumpVersion(1);
 
 	return bumpAngularModuleVersion(newVersion);
 });
 // Bump major version([magjor version].x.x)
-gulp.task("bumpMajorVersion", function() {
+gulp.task("bumpMajor", function() {
 	let newVersion = bumpVersion(0);
 
 	return bumpAngularModuleVersion(newVersion);
-});
-
-// Bump the patch version and then build
-gulp.task("buildPatch", function() {
-	runSequence(
-		"bumpPatchVersion",
-		"build"
-	);
-});
-// Bump the minor version and then build
-gulp.task("buildMinor", function() {
-	runSequence(
-		"bumpMinorVersion",
-		"build"
-	);
-});
-// Bump the major version and then build
-gulp.task("buildMajor", function() {
-	runSequence(
-		"bumpMajorVersion",
-		"build"
-	);
-});
-
-// build the module
-gulp.task("build", function() {
-	runSequence(
-		"templateCache"
-	);
 });

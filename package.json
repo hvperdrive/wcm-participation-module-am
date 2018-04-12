@@ -1,116 +1,116 @@
 {
-  "name": "@wcm/participation-am",
-  "version": "0.0.3",
-  "description": "Participation module for Antwerpen Morgen",
-  "main": "app",
-  "scripts": {
-    "test": "NODE_ENV=test APP=test ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha"
-  },
-  "publishConfig": {
-    "@wcm:registry": "https://nexusrepo.antwerpen.be/repository/npm-private"
-  },
-  "keywords": [
-    "Antwerpen Morgen",
-    "Participation",
-    "WCM",
-    "Pelorus",
-    "module",
-    "CMS"
-  ],
-  "wcmModule": {
-    "angularDirPath": "public/app/",
-    "cssDirPath": "public/styles/",
-    "moduleConfig": {
-      "angularModule": "wcm-participation",
-      "translationKey": "Participation",
-      "operationType": "participation",
-      "icon": "commenting-o",
-      "type": "system",
-      "machineName": "participation",
-      "navigationItem": true,
-      "authentication": {
-        "requiresLogin": true
-      }
+    "name": "@wcm/participation-am",
+    "version": "0.0.3",
+    "description": "Participation module for Antwerpen Morgen",
+    "main": "app",
+    "scripts": {
+        "test": "NODE_ENV=test APP=test ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha"
     },
-    "variables": [
-      {
-        "label": "Participation _id",
-        "key": "participationId",
-        "value": "",
-        "required": true,
-        "type": "text"
-      },
-      {
-        "label": "Cron time",
-        "key": "cron",
-        "value": "",
-        "required": true,
-        "type": "text"
-      },
-      {
-        "group": "Email",
-        "key": "email",
-        "accordion": true,
+    "publishConfig": {
+        "@wcm:registry": "https://nexusrepo.antwerpen.be/repository/npm-private"
+    },
+    "keywords": [
+        "Antwerpen Morgen",
+        "Participation",
+        "WCM",
+        "Pelorus",
+        "module",
+        "CMS"
+    ],
+    "wcmModule": {
+        "angularDirPath": "public/app/",
+        "cssDirPath": "public/styles/",
+        "moduleConfig": {
+            "angularModule": "wcm-participation",
+            "translationKey": "Participation",
+            "operationType": "participation",
+            "icon": "commenting-o",
+            "type": "system",
+            "machineName": "participation",
+            "navigationItem": true,
+            "authentication": {
+                "requiresLogin": true
+            }
+        },
         "variables": [
-          {
-            "label": "Sender host",
-            "description": "Sender email host",
-            "key": "host",
-            "value": "example@example.com",
-            "type": "text",
-            "required": true
-          },
-          {
-            "label": "Sender port",
-            "description": "Sender host port",
-            "key": "port",
-            "value": 26,
-            "type": "number",
-            "required": true
-          },
-          {
-            "label": "Sender auth user",
-            "key": "user",
-            "value": "",
-            "type": "text",
-            "required": true
-          },
-          {
-            "label": "Sender auth pass",
-            "key": "pass",
-            "value": "",
-            "type": "text",
-            "required": true
-          }
+            {
+                "label": "Participation _id",
+                "key": "participationId",
+                "value": "",
+                "required": true,
+                "type": "text"
+            },
+            {
+                "label": "Cron time",
+                "key": "cron",
+                "value": "",
+                "required": true,
+                "type": "text"
+            },
+            {
+                "group": "Email",
+                "key": "email",
+                "accordion": true,
+                "variables": [
+                    {
+                        "label": "Sender host",
+                        "description": "Sender email host",
+                        "key": "host",
+                        "value": "example@example.com",
+                        "type": "text",
+                        "required": true
+                    },
+                    {
+                        "label": "Sender port",
+                        "description": "Sender host port",
+                        "key": "port",
+                        "value": 26,
+                        "type": "number",
+                        "required": true
+                    },
+                    {
+                        "label": "Sender auth user",
+                        "key": "user",
+                        "value": "",
+                        "type": "text",
+                        "required": true
+                    },
+                    {
+                        "label": "Sender auth pass",
+                        "key": "pass",
+                        "value": "",
+                        "type": "text",
+                        "required": true
+                    }
+                ]
+            }
         ]
-      }
-    ]
-  },
-  "author": "Jeroen Valcke",
-  "license": "ISC",
-  "dependencies": {
-    "@wcm/module-helper": "1.0.0",
-    "eslint-plugin-chai-friendly": "^0.4.1",
-    "glob": "^7.1.2",
-    "node-excel-export": "^1.4.3",
-    "path": "^0.12.7",
-    "q": "^1.5.1",
-    "ramda": "^0.25.0",
-    "rootpath": "~0.1.2",
-    "wcm-mail-helper": "git+https://github.com/hvperdrive/wcm-mail-helper.git#v1.0.3"
-  },
-  "devDependencies": {
-    "@district01/eslint-config": "1.0.0",
-    "apidoc-swagger": "git+https://github.com/JvJefke/apidoc-swagger.git",
-    "chai": "~4.1.2",
-    "gulp": "~3.9.1",
-    "gulp-angular-templatecache": "~2.0.0",
-    "gulp-apidoc": "~0.2.0",
-    "gulp-apidoc-swagger": "~0.2.2",
-    "gulp-replace": "~0.5.4",
-    "istanbul": "^0.4.5",
-    "mocha": "~4.0.1",
-    "run-sequence": "~1.2.2",
-    "sinon": "~4.0.2"
-  }
+    },
+    "author": "Jeroen Valcke",
+    "license": "ISC",
+    "dependencies": {
+        "@wcm/module-helper": "1.0.0",
+        "eslint-plugin-chai-friendly": "^0.4.1",
+        "glob": "^7.1.2",
+        "node-excel-export": "^1.4.3",
+        "path": "^0.12.7",
+        "q": "^1.5.1",
+        "ramda": "^0.25.0",
+        "rootpath": "~0.1.2",
+        "wcm-mail-helper": "git+https://github.com/hvperdrive/wcm-mail-helper.git#v1.0.3"
+    },
+    "devDependencies": {
+        "@district01/eslint-config": "1.0.0",
+        "apidoc-swagger": "git+https://github.com/JvJefke/apidoc-swagger.git",
+        "chai": "~4.1.2",
+        "gulp": "~3.9.1",
+        "gulp-angular-templatecache": "~2.0.0",
+        "gulp-apidoc": "~0.2.0",
+        "gulp-apidoc-swagger": "~0.2.2",
+        "gulp-replace": "~0.5.4",
+        "istanbul": "^0.4.5",
+        "mocha": "~4.0.1",
+        "run-sequence": "~1.2.2",
+        "sinon": "~4.0.2"
+    }
 }
