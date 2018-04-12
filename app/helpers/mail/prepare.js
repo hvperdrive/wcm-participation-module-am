@@ -8,7 +8,7 @@ const translator = require(path.join(process.cwd(), "/app/helpers/translator"));
 
 const queries = require("../queries");
 
-const baseTemplate = fs.readFileSync(path.join(__dirname, "./templates/baseLayout.html"));
+const baseTemplate = fs.readFileSync(path.join(__dirname, "./templates/baseLayout.html")).toString();
 
 const TYPE_REMIND = "TYPE_REMIND";
 const TYPE_CONFIRM = "TYPE_CONFIRM";

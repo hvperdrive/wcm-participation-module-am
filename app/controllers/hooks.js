@@ -2,12 +2,16 @@
 
 const variablesHelper = require("../helpers/variables");
 const mail = require("../helpers/mail");
+const cron = require("../helpers/cron");
 
 const onLoadComplete = () => {
 	variablesHelper.reload();
 };
 const onConfigurationChanged = () => {
-	variablesHelper.reload().then((variables) => mail.sendBulk.resetPool(variables));
+	variablesHelper.reload().then((variables) => {
+		mail.sendBulk.resetPool(variables);
+		cron.reset();
+	});
 };
 
 module.exports.handleHooks = (hooks) => {

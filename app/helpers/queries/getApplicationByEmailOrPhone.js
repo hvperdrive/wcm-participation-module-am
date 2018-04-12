@@ -28,6 +28,6 @@ module.exports = (email, phone) => {
 	return ParticipationApplication.find({
 		"$or": or,
 		"meta.deleted": false,
-	}).exec().lean();
+	}).lean().exec();
 };
 
