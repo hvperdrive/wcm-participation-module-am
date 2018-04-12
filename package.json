@@ -41,6 +41,13 @@
         "type": "text"
       },
       {
+        "label": "Cron time",
+        "key": "cron",
+        "value": "",
+        "required": true,
+        "type": "text"
+      },
+      {
         "group": "Email",
         "key": "email",
         "accordion": true,
