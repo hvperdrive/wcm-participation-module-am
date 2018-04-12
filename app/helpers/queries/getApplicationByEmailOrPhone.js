@@ -15,8 +15,8 @@ module.exports = (email, phone) => {
 	if (R.pathOr(false, ["number"])(phone) && R.pathOr(false, ["selectedCountry", "dialCode"])(phone)) {
 		or.push({
 			"$and": [
-                { "data.phone.number": R.pathOr(false, ["number"])(phone) },
-                { "data.phone.selectedCountry.dialCode": R.pathOr(false, ["selectedCountry", "dialCode"])(phone) },
+				{ "data.phone.number": R.pathOr(false, ["number"])(phone) },
+				{ "data.phone.selectedCountry.dialCode": R.pathOr(false, ["selectedCountry", "dialCode"])(phone) },
 			],
 		});
 	}
@@ -28,6 +28,6 @@ module.exports = (email, phone) => {
 	return ParticipationApplication.find({
 		"$or": or,
 		"meta.deleted": false,
-	});
+	}).exec().lean();
 };
 

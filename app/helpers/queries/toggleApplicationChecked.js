@@ -2,4 +2,4 @@
 
 const ParticipationApplication = require("../../models/participationApplication");
 
-module.exports = (uuid, bool) => ParticipationApplication.update({ uuid }, { $set: { "meta.checked": bool } });
+module.exports = (uuid, bool) => ParticipationApplication.update({ uuid }, { $set: { "meta.checked": bool } }).exec();

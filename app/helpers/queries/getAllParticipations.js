@@ -1,9 +1,7 @@
 "use strict";
 
-const path = require("path");
-
 const ParticipationApplication = require("../../models/participationApplication");
-const ContentModel = require(path.join(process.cwd(), "/app/models/content"));
+const ContentModel = require("@wcm/module-helper").models.Content;
 
 const variables = require("../variables");
 

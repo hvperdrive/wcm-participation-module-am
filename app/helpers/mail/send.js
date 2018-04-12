@@ -1,14 +1,16 @@
 const MailHelper = require("wcm-mail-helper");
-const variables = require("../variables");
+const getVariables = require("../variables").get;
 
 module.exports = (to, subject, template, data) => {
+	const variables = getVariables();
+
 	const options = {
 		template,
 		data,
 		emailOptions: {
 			from: {
-				name: variables.email.variables.fromName,
-				address: variables.email.variables.address,
+				name: variables.email.variables.fromName || "Antwerpen Morgen",
+				address: variables.email.variables.address || "antwerpenmorgen@antwerpen.be",
 			},
 			to,
 			subject,
