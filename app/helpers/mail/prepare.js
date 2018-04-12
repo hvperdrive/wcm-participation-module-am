@@ -1,12 +1,14 @@
 const R = require("ramda");
 const Q = require("q");
 const path = require("path");
+const fs = require("fs");
 const MailHelper = require("wcm-mail-helper");
 
 const translator = require(path.join(process.cwd(), "/app/helpers/translator"));
 
-
 const queries = require("../queries");
+
+const baseTemplate = fs.readFileSync(path.join(__dirname, "./templates/baseLayout"));
 
 const TYPE_REMIND = "TYPE_REMIND";
 const TYPE_CONFIRM = "TYPE_CONFIRM";
@@ -69,7 +71,7 @@ const mapToMailData = (applicationEmail, participation, type) => {
 	]).then((result) => ({
 		to: applicationEmail,
 		subject: result[0],
-		template: "body here: <br/> {{body | safe}}",
+		template: baseTemplate,
 		data: Object.assign(data, { body: result[1] }),
 	}));
 };
