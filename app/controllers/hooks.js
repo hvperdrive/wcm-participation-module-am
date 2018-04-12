@@ -8,8 +8,8 @@ const onLoadComplete = () => {
 	variablesHelper.reload();
 };
 const onConfigurationChanged = () => {
-	variablesHelper.reload().then((variables) => {
-		mail.sendBulk.resetPool(variables);
+	variablesHelper.reload().then(() => {
+		mail.sendBulk.resetPool();
 		cron.reset();
 	});
 };

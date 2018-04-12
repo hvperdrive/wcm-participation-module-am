@@ -66,18 +66,18 @@ module.exports = (arrMailData) => {
 		.catch((err) => console.log(err)); // eslint-disable-line no-console
 };
 
-const initPool = module.exports.initPool = module.exports.resetPool = (vars) => {
+const initPool = module.exports.initPool = module.exports.resetPool = () => {
 	if (transporter) {
 		transporter.close();
 		transporter = null;
 	}
 
 	transporter = nodemailer.createTransport({
-		host: vars.email.variables.host,
-		port: vars.email.variables.port,
+		host: variables.get().email.variables.host,
+		port: variables.get().email.variables.port,
 		auth: {
-			user: vars.email.variables.user,
-			pass: vars.email.variables.pass,
+			user: variables.get().email.variables.user,
+			pass: variables.get().email.variables.pass,
 		},
 		pool: true,
 		maxConnections: 20,
