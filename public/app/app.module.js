@@ -1,19 +1,19 @@
 "use strict";
 
 (function(angular) {
-	angular.module("wcm-participation_0.0.4.factories", []);
-	angular.module("wcm-participation_0.0.4.services", ["wcm-participation_0.0.4.factories"]);
-	angular.module("wcm-participation_0.0.4.controllers", ["wcm-participation_0.0.4.services"]);
-	angular.module("wcm-participation_0.0.4.directives", ["wcm-participation_0.0.4.controllers"]);
+	angular.module("wcm-participation_0.0.5.factories", []);
+	angular.module("wcm-participation_0.0.5.services", ["wcm-participation_0.0.5.factories"]);
+	angular.module("wcm-participation_0.0.5.controllers", ["wcm-participation_0.0.5.services"]);
+	angular.module("wcm-participation_0.0.5.directives", ["wcm-participation_0.0.5.controllers"]);
 
-	angular.module("wcm-participation_0.0.4", [
+	angular.module("wcm-participation_0.0.5", [
 
 		"pelorus.services",
 
-		"wcm-participation_0.0.4.factories",
-		"wcm-participation_0.0.4.services",
-		"wcm-participation_0.0.4.controllers",
-		"wcm-participation_0.0.4.directives",
+		"wcm-participation_0.0.5.factories",
+		"wcm-participation_0.0.5.services",
+		"wcm-participation_0.0.5.controllers",
+		"wcm-participation_0.0.5.directives",
 
 	])
 		.run([function() {
