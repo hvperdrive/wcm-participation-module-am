@@ -15,7 +15,7 @@ const ParticipationApplicationsSchema = new Schema({
 		participation: {
 			type: String,
 			required: true,
-			ref: "content",
+			ref: "Content",
 		},
 		email: {
 			type: String,
@@ -47,6 +47,10 @@ const ParticipationApplicationsSchema = new Schema({
 	},
 	meta: {
 		checked: {
+			type: Boolean,
+			default: false,
+		},
+		reminded: {
 			type: Boolean,
 			default: false,
 		},
