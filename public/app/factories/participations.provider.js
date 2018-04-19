@@ -1,26 +1,29 @@
 "use strict";
 
 (function(angular) {
-	angular.module("wcm-boilerplate_0.0.1.factories")
-		.factory("boilerplateFactory", [
+	angular.module("wcm-participation_0.0.8.factories")
+		.factory("participationsFactory", [
 
 			"$resource",
 			"configuration",
 
-			function crmFactory($resource, configuration) {
+			function participationFactory($resource, configuration) {
 
 				var api = configuration.serverPath + configuration.apiPrefix + configuration.apiLevel;
 				var factory = {};
 
-				factory = $resource(api + "boilerplate/:listController:id/:docController", {
+				factory = $resource(api + "participations/:listController/:id/:docController", {
 					id: "@uuid",
 					listController: "@listController",
 					docController: "@docController",
 				}, {
-						update: {
-							method: "PUT",
-						},
-					});
+					update: {
+						method: "PUT",
+					},
+					patch: {
+						method: "PATCH",
+					},
+				});
 
 				return factory;
 			},

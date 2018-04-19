@@ -1,11 +1,47 @@
 <div class="content--inner">
 
 	<h1 class="c-page-title">
-		<span translate>Edit</span>
+		<span translate>Applications for</span>
+		<i>{{itemData.meta.label}}</i>
 	</h1>
 
-	<div ng-form name="resourceForms.itemForm">
-		<span class="customClass">Something with custom styling from the module as an example</span>
-	</div>
+	<div ng-form name="resourceForms.metaForm" role="form">
 
+		<fieldset class="c-form__fieldset">
+			<legend class="c-form__fieldset__legend" translate>Participation info</legend>
+
+			<div class="c-form__fieldset__content u-clear">
+				<div class="u-margin-bottom">
+					<label class="c-label" translate>Title</label>
+					<br/>
+					<span class="u-text-normal">{{itemData.fields.title.nl}}</span>
+				</div>
+				<div class="u-margin-bottom">
+					<label class="c-label" translate>Intro:</label>
+					<br/>
+					<span>{{itemData.fields.intro.nl}}</span>
+				</div>
+				<div class="u-margin-bottom">
+					<label class="c-label" translate>Begin date:</label>
+					<br/>
+					<span>{{(itemData.fields.beginDate | date: "dd/MM/yyyy HH:mm") || "N/A"}}</span>
+				</div>
+				<div>
+					<label class="c-label" translate>End date:</label>
+					<br/>
+					<span>{{(itemData.fields.endDate | date: "dd/MM/yyyy HH:mm") || "N/A"}}</span>
+				</div>
+			</div>
+		</fieldset>
+
+		<h3 class="page-section-title h3-structure">
+			<span>Applications</span>
+			<button
+				class="fr u-inline c-button c-button--alpha c-button--sm"
+				ng-click="exportToExcel()">
+				Export to Excel
+			</button>
+		</h3>
+		<d01-table source="data" config="tableConfig"></d01-table>
+	</div>
 </div>
