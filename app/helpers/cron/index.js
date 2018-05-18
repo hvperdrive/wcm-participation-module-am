@@ -24,3 +24,11 @@ module.exports.init = module.exports.reset = () => {
 
 	job.start();
 };
+
+module.exports.stop = () => {
+	if (!job) {
+		return;
+	}
+
+	job.stop();
+};

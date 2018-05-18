@@ -13,11 +13,15 @@ const onConfigurationChanged = () => {
 		cron.reset();
 	});
 };
+const beforeRemove = () => {
+	cron.stop();
+};
 
 module.exports.handleHooks = (hooks) => {
 	const myHooks = {
-		onLoadComplete: onLoadComplete,
-		onConfigurationChanged: onConfigurationChanged,
+		onLoadComplete,
+		onConfigurationChanged,
+		beforeRemove,
 	};
 
 	Object.assign(hooks, myHooks);
