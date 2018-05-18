@@ -43,8 +43,6 @@ const sendMail = () => {
 			}
 		});
 	}
-
-
 };
 
 module.exports = (arrMailData) => {
