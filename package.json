@@ -63,8 +63,8 @@
             "label": "Sender host",
             "description": "Sender email host",
             "key": "host",
-            "value": "example@example.com",
-            "type": "email",
+            "value": "example.example.com",
+            "type": "text",
             "required": true
           },
           {
