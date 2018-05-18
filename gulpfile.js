@@ -42,7 +42,7 @@ const bumpVersion = function bumpVersion(level) {
 
 	packageConfig.version = versionArr.join(".");
 
-	fs.writeFileSync("./package.json", JSON.stringify(packageConfig, null, 4));
+	fs.writeFileSync("./package.json", JSON.stringify(packageConfig, null, 2));
 
 	return packageConfig.version;
 };
