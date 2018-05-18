@@ -101,10 +101,10 @@ module.exports.export = (req, res) => {
 
 module.exports.getParticipationApplicationCount = (req, res) => {
 	if (!req.params.slug) {
-		return res.status(400).json({ message: "No uuid param passed" });
+		return res.status(400).json({ message: "No slug param passed" });
 	}
 
 	return queries.getParticipationApplicationCount(req.params.slug)
-		.then((count) => res.json(200).json({ count }))
+		.then((count) => res.status(200).json({ count }))
 		.catch((error) => sendErrorResult(res, error));
 };

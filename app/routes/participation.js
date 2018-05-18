@@ -19,7 +19,7 @@ const baseUrl = "/" + config.api.prefix + config.api.version + "participations";
 
 module.exports = (app) => {
 	// Public (behind apikey)
-	app.route(baseUrl + "/:uuid/applications/count").get(participationController.getParticipationApplicationCount);
+	app.route(baseUrl + "/:slug/applications/count").get(participationController.getParticipationApplicationCount);
 	app.route(baseUrl + "/applications").post(participationController.apply);
 
 	// Admin
