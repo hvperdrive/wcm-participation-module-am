@@ -25,7 +25,7 @@ const STYLES = {
 };
 
 const SPECIFICATION = {
-	i: {
+	index: {
 		displayName: "#",
 		headerStyle: STYLES.header,
 		cellStyle: STYLES.cell,
@@ -63,7 +63,7 @@ module.exports = (applications) => R.compose(
 		data: dataset,
 	}]),
 	mapIndexed((app, i) => ({
-		i: 1 + i,
+		index: i + 1,
 		email: R.pathOr("", ["data", "email"])(app),
 		tel: R.pathOr(false, ["data", "phone", "number"])(app) ?
 			R.pathOr("", ["data", "phone", "selectedCountry", "dialCode"])(app) + " " + R.pathOr("", ["data", "phone", "number"])(app) :
