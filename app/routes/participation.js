@@ -18,6 +18,9 @@ const PermissionsSecurity = require("@wcm/module-helper").permissionsSecurity("p
 const baseUrl = "/" + config.api.prefix + config.api.version + "participations";
 
 module.exports = (app) => {
+	// Public (behind apikey)
+	app.route(baseUrl + "/:uuid/applications/count").get(participationController.getParticipationApplicationCount);
+	app.route(baseUrl + "/applications").post(participationController.apply);
 
 	// Admin
 	app.route(baseUrl).get(ProfileSecurity, MethodSecurity.read, PermissionsSecurity, participationController.getAllParticipations);
@@ -28,8 +31,4 @@ module.exports = (app) => {
 	app.route(baseUrl + "/applications/:uuid/uncheck").patch(ProfileSecurity, MethodSecurity.read, PermissionsSecurity, participationController.uncheck);
 
 	app.route(baseUrl + "/applications/:uuid").delete(ProfileSecurity, MethodSecurity.read, PermissionsSecurity, participationController.remove);
-
-	// Public (behind apikey)
-	app.route(baseUrl + "/applications").post(participationController.apply);
-
 };

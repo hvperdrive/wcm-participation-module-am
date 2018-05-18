@@ -1,9 +1,8 @@
-"use strict";
-
 const getAllParticipations = require("./getAllParticipations");
 const getAndUpdateApplicationByRemind = require("./getAndUpdateApplicationByRemind");
 const getApplicationByEmailOrPhone = require("./getApplicationByEmailOrPhone");
 const getApplicationsByParticipationId = require("./getApplicationsByParticipationId");
+const getParticipationApplicationCount = require("./getParticipationApplicationCount");
 const getParticipationId = require("./getParticipationId");
 const getParticipationInfo = require("./getParticipationInfo");
 const removeApplication = require("./removeApplication");
@@ -15,6 +14,7 @@ module.exports = {
 	getAndUpdateApplicationByRemind,
 	getApplicationByEmailOrPhone,
 	getApplicationsByParticipationId,
+	getParticipationApplicationCount,
 	getParticipationId,
 	getParticipationInfo,
 	removeApplication,

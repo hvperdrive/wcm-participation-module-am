@@ -98,3 +98,13 @@ module.exports.export = (req, res) => {
 		})
 		.catch((error) => sendErrorResult(res, error));
 };
+
+module.exports.getParticipationApplicationCount = (req, res) => {
+	if (!req.params.uuid) {
+		return res.status(400).json({ message: "No uuid param passed" });
+	}
+
+	return queries.getParticipationApplicationCount(req.params.uuid)
+		.then((count) => res.json(200).json({ count }))
+		.catch((error) => sendErrorResult(res, error));
+};
