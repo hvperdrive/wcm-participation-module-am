@@ -12,7 +12,7 @@ module.exports = () => {
 			R.when(
 				(arr) => !!arr.length,
 				R.compose(
-					promises.push,
+					(p) => promises.push(p),
 					mail.prepare.remindConfirm,
 					R.pathOr(false, [0, "data", "participation"])
 				)

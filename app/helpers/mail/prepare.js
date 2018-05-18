@@ -58,13 +58,14 @@ const mapToMailData = (applicationEmail, participation, type, additionalData) =>
 	}
 
 	const data = R.compose(
+        R.merge(R.__, additionalData || {}),
 		R.curry(translator)(R.__, "nl"),
 		getParticipationFields
 	)(participation);
 
 	return Q.all([
 		MailHelper.generateHtmlFromTemplate({ template: subject, data }),
-		MailHelper.generateHtmlFromTemplate({ template, data: Object.assign({}, data, additionalData) }),
+		MailHelper.generateHtmlFromTemplate({ template, data }),
 	]).then((result) => ({
 		to: applicationEmail,
 		subject: result[0],
@@ -74,7 +75,7 @@ const mapToMailData = (applicationEmail, participation, type, additionalData) =>
 };
 
 const createFinalRemindMailData = (participation) => {
-	const to = R.path(["email", "confirmEmails"], variables.get());
+    const to = R.path(["email", "variables", "confirmEmails"], variables.get());
 
 	if (!participation || !to) {
 		return null;
