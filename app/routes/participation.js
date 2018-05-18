@@ -29,7 +29,7 @@ module.exports = (app) => {
 
 	app.route(baseUrl + "/applications/:uuid").delete(ProfileSecurity, MethodSecurity.read, PermissionsSecurity, participationController.remove);
 
-	// Public
+	// Public (behind apikey)
 	app.route(baseUrl + "/applications").post(participationController.apply);
 
 };

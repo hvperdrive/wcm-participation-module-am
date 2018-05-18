@@ -9,10 +9,13 @@ module.exports = () => {
 		.then((applications) => {
 			const promises = applications.map((a) => mail.prepare.remind(a, a.data.participation));
 
-			R.compose(
-				promises.push,
-				mail.prepare.createFinalRemindMailData,
-				R.path([0, "data", "participation"])
+			R.when(
+				(arr) => !!arr.length,
+				R.compose(
+					promises.push,
+					mail.prepare.remindConfirm,
+					R.pathOr(false, [0, "data", "participation"])
+				)
 			)(applications); // Add remind confirm email to the queue
 
 			return Q.all(promises);
