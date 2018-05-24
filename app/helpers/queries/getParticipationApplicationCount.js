@@ -1,3 +1,4 @@
+const R = require("ramda");
 const path = require("path");
 
 const variables = require("../variables");
@@ -19,8 +20,8 @@ module.exports = (slug) => {
 			}
 
 			return ParticipationApplicationModel.aggregate([
-				{ $match: { "data.participation": participation._id, "meta.deleted": false } },
-				{ $group: { _id: null, count: { $sum: "$data.amount" } } },
-			]).then((result) => result.count);
+				{ $match: { "data.participation": participation._id.toString(), "meta.deleted": false } },
+				{ $group: { _id: null, count: { $sum: { $ifNull: ["$data.amount", 1] } } } },
+			]).exec().then((result) => console.log(result) || R.pathOr(0, [0, "count"])(result));
 		});
 };

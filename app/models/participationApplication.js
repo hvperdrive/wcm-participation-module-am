@@ -47,6 +47,7 @@ const ParticipationApplicationsSchema = new Schema({
 		amount: {
 			type: Number,
 			required: true,
+			default: 1,
 		},
 	},
 	meta: {

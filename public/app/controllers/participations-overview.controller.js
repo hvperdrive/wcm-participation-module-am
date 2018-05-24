@@ -42,7 +42,7 @@
 						sortable: true,
 					}, {
 						columnName: LabelService.getString("Applicants"),
-						key: "participation.count",
+						key: "count",
 						sortable: true,
 					}, {
 						columnName: LabelService.getString("Actions"),

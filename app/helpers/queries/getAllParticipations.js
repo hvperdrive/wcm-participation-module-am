@@ -7,7 +7,7 @@ const variables = require("../variables");
 
 module.exports = () => ParticipationApplicationModel.aggregate(
 	{ $match: { "meta.deleted": false } },
-	{ $group: { _id: "$data.participation", applications: { $push: "$$ROOT" }, count: { $sum: "$data.amount" } } },
+	{ $group: { _id: "$data.participation", applications: { $push: "$$ROOT" }, count: { $sum: { $ifNull: ["$data.amount", 1] } } } },
 	{ $project: { participation: "$_id", applications: 1, count: 1, _id: 0 } }
 ).exec().then((result) => ContentModel.populate(result, {
 	path: "participation",
