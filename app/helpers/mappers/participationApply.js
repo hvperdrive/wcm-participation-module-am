@@ -10,6 +10,7 @@ module.exports = (body, participationId) => {
 			participation: participationId,
 			email: pathOrFromBody("", ["email"]),
 			phone: pathOrFromBody("", ["tel"]),
+			amount: pathOrFromBody(1, ["amount"]),
 			optIns: {
 				reminder: pathOrFromBody(false, ["reminderOptIn"]),
 				cancel: pathOrFromBody(false, ["cancelOptIn"]),

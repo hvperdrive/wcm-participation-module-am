@@ -18,9 +18,9 @@ module.exports = (slug) => {
 				throw { status: 404, message: "participation item not found" };
 			}
 
-			return ParticipationApplicationModel.count({
-				"data.participation": participation._id,
-				"meta.deleted": false,
-			});
+			return ParticipationApplicationModel.aggregate([
+				{ $match: { "data.participation": participation._id, "meta.deleted": false } },
+				{ $group: { _id: null, count: { $sum: "$data.amount" } } },
+			]).then((result) => result.count);
 		});
 };

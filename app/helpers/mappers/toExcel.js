@@ -42,6 +42,12 @@ const SPECIFICATION = {
 		cellStyle: STYLES.cell,
 		width: "20",
 	},
+	amount: {
+		displayName: "Amount",
+		headerStyle: STYLES.header,
+		cellStyle: STYLES.cell,
+		width: "10",
+	},
 	created: {
 		displayName: "Applied on",
 		headerStyle: STYLES.header,
@@ -70,5 +76,6 @@ module.exports = (applications) => R.compose(
 			"",
 		created: R.pathOr("", ["meta", "created"])(app),
 		cancelOptIn: R.pathOr("", ["data", "optIns", "cancel"])(app) ? "true" : "false",
+		amount: R.pathOr(1, ["data", "amount"])(app),
 	}))
 )(applications);

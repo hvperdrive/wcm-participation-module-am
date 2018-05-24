@@ -3,6 +3,7 @@ const R = require("ramda");
 module.exports = (body) => {
 	return R.allPass([
 		R.pathOr(false, ["participationUuid"]),
+		R.pathOr(false, ["amount"]),
 		R.either(
 			R.pathOr(false, ["email"]),
 			R.allPass([

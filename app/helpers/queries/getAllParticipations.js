@@ -7,16 +7,14 @@ const variables = require("../variables");
 
 module.exports = () => ParticipationApplicationModel.aggregate(
 	{ $match: { "meta.deleted": false } },
-	{ $group: { _id: "$data.participation", applications: { $push: "$$ROOT" } } },
-	{ $project: { participation: "$_id", applications: 1, _id: 0 } }
-)
-	.exec()
-	.then((result) => ContentModel.populate(result, {
-		path: "participation",
-		match: {
-			"meta.deleted": false,
-			"meta.published": true,
-			"meta.contentType": variables.get().participationId,
-		},
-	}));
+	{ $group: { _id: "$data.participation", applications: { $push: "$$ROOT" }, count: { $sum: "$data.amount" } } },
+	{ $project: { participation: "$_id", applications: 1, count: 1, _id: 0 } }
+).exec().then((result) => ContentModel.populate(result, {
+	path: "participation",
+	match: {
+		"meta.deleted": false,
+		"meta.published": true,
+		"meta.contentType": variables.get().participationId,
+	},
+}));
 

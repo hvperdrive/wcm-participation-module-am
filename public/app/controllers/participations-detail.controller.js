@@ -52,6 +52,10 @@
 						template: "<span>{{i.data.optIns.reminder ? 'true' : 'false'}}</span>",
 						sortable: true,
 					}, {
+						columnName: LabelService.getString("Amount"),
+						key: "data.amount",
+						sortable: true,
+					}, {
 						columnName: LabelService.getString("Date"),
 						template: "<span>{{i.meta.created | date: 'dd/MM/yyyy HH:mm'}}</span>",
 						sortable: true,
