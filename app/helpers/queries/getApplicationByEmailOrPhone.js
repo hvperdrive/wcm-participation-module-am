@@ -5,7 +5,7 @@ const R = require("ramda");
 
 const ParticipationApplication = require("../../models/participationApplication");
 
-module.exports = (email, phone) => {
+module.exports = (participationId, email, phone) => {
 	const or = [];
 
 	if (email) {
@@ -27,6 +27,7 @@ module.exports = (email, phone) => {
 
 	return ParticipationApplication.find({
 		"$or": or,
+		"data.participation": participationId,
 		"meta.deleted": false,
 	}).lean().exec();
 };

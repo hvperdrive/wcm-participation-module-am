@@ -6,10 +6,11 @@ const ContentModel = require(path.join(process.cwd(), "app/models/content"));
 
 const variables = require("../variables");
 
-const getTruthyQuery = (fieldName) => {
+const getTruthyQuery = (fieldName, type) => {
 	return [
 		{ [fieldName]: { $exists: true } },
-		{ [fieldName]: { $not: "" } },
+		{ [fieldName]: { $ne: "" } },
+		{ [fieldName]: { $type: type } },
 	];
 };
 
@@ -22,12 +23,12 @@ module.exports = () => {
 
 	// STEP 1
 	return ContentModel.find({
-		"$and" : [
+		"$and": [
 			{ "fields.reminderMailDateTime": { $exists: true } },
 			{ "fields.reminderMailDateTime": { $lte: currDate.toISOString() } }, // Only send reminder mails if a specific date has passed
 		].concat(
-			getTruthyQuery("fields.emailReminderSubject"), // Only send reminder mails when reminder mail subject is set
-			getTruthyQuery("fields.templateReminderEmail") // Only send reminder mails when reminder mail body is set
+			getTruthyQuery("fields.emailReminderSubject.nl", 2, true), // Only send reminder mails when reminder mail subject is set
+			getTruthyQuery("fields.templateReminderEmail.nl", 2, true) // Only send reminder mails when reminder mail body is set
 		),
 		"fields.endDate": { $gt: currDate.toISOString() }, // exclude participations that have ended
 		"meta.deleted": false,

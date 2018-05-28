@@ -54,11 +54,11 @@ const mapToMailData = (applicationEmail, participation, type, additionalData) =>
 
 	// No template or subject set => skip
 	if (!template || !subject) {
-		return null;
+		return Q.when(null);
 	}
 
 	const data = R.compose(
-        R.merge(R.__, additionalData || {}),
+		R.merge(R.__, additionalData ||  {}),
 		R.curry(translator)(R.__, "nl"),
 		getParticipationFields
 	)(participation);
@@ -75,10 +75,10 @@ const mapToMailData = (applicationEmail, participation, type, additionalData) =>
 };
 
 const createFinalRemindMailData = (participation) => {
-    const to = R.path(["email", "variables", "confirmEmails"], variables.get());
+	const to = R.path(["email", "variables", "confirmEmails"], variables.get());
 
 	if (!participation || !to) {
-		return null;
+		return Q.when(null);
 	}
 
 	return mapToMailData(
@@ -101,7 +101,7 @@ module.exports.confirm = (application) => {
 
 	// No email set => skip
 	if (!applicationEmail) {
-		return null;
+		return q.when(null);
 	}
 
 	return queries.getParticipationInfo(participationId)
@@ -117,7 +117,7 @@ module.exports.remind = (application, participation) => {
 
 	// No email set => skip
 	if (!applicationEmail) {
-		return null;
+		return Q.when(null);
 	}
 
 	return mapToMailData(applicationEmail, participation, TYPE_REMIND);
