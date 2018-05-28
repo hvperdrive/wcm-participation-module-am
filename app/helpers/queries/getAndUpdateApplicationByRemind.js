@@ -6,6 +6,13 @@ const ContentModel = require(path.join(process.cwd(), "app/models/content"));
 
 const variables = require("../variables");
 
+const getTruthyQuery = (fieldName) => {
+	return [
+		{ [fieldName]: { $exists: true } },
+		{ [fieldName]: { $not: "" } },
+	];
+};
+
 // STEP 1: Get all participations that need to have a reminder mail sent
 // STEP 2: Get all applications of the retreived participations that have no reminder mail sent yet.
 // SETP 3: Update the retreived applications in one query to set the reminded property on true.
@@ -15,7 +22,13 @@ module.exports = () => {
 
 	// STEP 1
 	return ContentModel.find({
-		"fields.reminderMailDateTime": { $lte: currDate.toISOString() }, // Only send reminder mails if a specific date has passed
+		"$and" : [
+			{ "fields.reminderMailDateTime": { $exists: true } },
+			{ "fields.reminderMailDateTime": { $lte: currDate.toISOString() } }, // Only send reminder mails if a specific date has passed
+		].concat(
+			getTruthyQuery("fields.emailReminderSubject"), // Only send reminder mails when reminder mail subject is set
+			getTruthyQuery("fields.templateReminderEmail") // Only send reminder mails when reminder mail body is set
+		),
 		"fields.endDate": { $gt: currDate.toISOString() }, // exclude participations that have ended
 		"meta.deleted": false,
 		"meta.published": true,
