@@ -1,6 +1,6 @@
 {
   "name": "@wcm/participation-am",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "Participation module for Antwerpen Morgen",
   "main": "app",
   "scripts": {
@@ -57,7 +57,7 @@
             "description": "Email addresses to send to to confirm a particpation reminder mail is sent",
             "key": "confirmEmails",
             "value": "example@example.com",
-            "type": "email"
+            "type": "text"
           },
           {
             "label": "Sender host",
