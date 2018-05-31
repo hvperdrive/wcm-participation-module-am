@@ -4,6 +4,7 @@ module.exports = (body) => {
 	return R.allPass([
 		R.pathOr(false, ["participationUuid"]),
 		R.pathOr(false, ["amount"]),
+		R.pathOr(false, ["name"]),
 		R.either(
 			R.pathOr(false, ["email"]),
 			R.allPass([

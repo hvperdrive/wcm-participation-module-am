@@ -20,6 +20,10 @@ const ParticipationApplicationsSchema = new Schema({
 		email: {
 			type: String,
 		},
+		name: {
+			type: String,
+			required: true,
+		},
 		phone: {
 			number: {
 				type: String,

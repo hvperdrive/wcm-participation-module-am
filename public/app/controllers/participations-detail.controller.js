@@ -1,7 +1,7 @@
 "use strict";
 
 (function(angular) {
-	angular.module("wcm-participation_0.0.16.controllers")
+	angular.module("wcm-participation_0.0.17.controllers")
 		.controller("participationsDetailController", [
 			"$scope",
 			"$controller",
@@ -40,6 +40,10 @@
 						},
 					},
 					columns: [{
+						columnName: LabelService.getString("Name"),
+						key: "data.name",
+						sortable: true,
+					}, {
 						columnName: LabelService.getString("ID"),
 						template: "<span>{{ i.data.email || i.data.phone.number }}</span>",
 						sortable: true,
@@ -63,14 +67,15 @@
 						columnName: LabelService.getString("Processed"),
 						template: "<input type=\"checkbox\" ng-model=\"i.meta.checked\" ng-change=\"parent.updateCheck(i.uuid, i.meta.checked)\" />",
 						sortable: true,
-					}, {
-						columnName: LabelService.getString("Actions"),
-						template: "<a >" + LabelService.getString("open") + "</a>",
 					}],
 				};
 
 				// Extend the default resource controller
 				angular.extend(this, $controller("ResourceController", { $scope: $scope, InstanceData: InstanceData, Languages: [] }));
+
+				// prevent save and delete button from being shown.
+				$scope.allowButton("save", false);
+				$scope.allowButton("delete", false);
 
 				// ResourceView configuration
 				$scope.context.type = LabelService.getString("Participations"); // Set the current type to "Member"

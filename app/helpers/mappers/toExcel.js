@@ -30,6 +30,12 @@ const SPECIFICATION = {
 		headerStyle: STYLES.header,
 		cellStyle: STYLES.cell,
 	},
+	name: {
+		displayName: "Name",
+		headerStyle: STYLES.header,
+		cellStyle: STYLES.cell,
+		width: "40",
+	},
 	email: {
 		displayName: "Email",
 		headerStyle: STYLES.header,
@@ -70,6 +76,7 @@ module.exports = (applications) => R.compose(
 	}]),
 	mapIndexed((app, i) => ({
 		index: "" + (i + 1),
+		name: R.pathOr("", ["data", "name"])(app),
 		email: R.pathOr("", ["data", "email"])(app),
 		tel: R.pathOr(false, ["data", "phone", "number"])(app) ?
 			R.pathOr("", ["data", "phone", "selectedCountry", "dialCode"])(app) + " " + R.pathOr("", ["data", "phone", "number"])(app) :

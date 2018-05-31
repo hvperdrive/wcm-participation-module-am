@@ -83,9 +83,16 @@
             "required": true
           },
           {
-            "label": "Sender auth pass",
-            "key": "pass",
-            "value": "",
+            "label": "Visible from name",
+            "key": "fromName",
+            "value": "Antwerpen Morgen",
+            "type": "text",
+            "required": true
+          },
+          {
+            "label": "Visible from email address",
+            "key": "address",
+            "value": "antwerpenmorgen@antwerpen.be",
             "type": "text",
             "required": true
           }
