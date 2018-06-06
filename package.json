@@ -1,6 +1,6 @@
 {
   "name": "@wcm/participation-am",
-  "version": "0.0.19",
+  "version": "0.0.21",
   "description": "Participation module for Antwerpen Morgen",
   "main": "app",
   "scripts": {
@@ -80,6 +80,13 @@
             "key": "user",
             "value": "",
             "type": "text",
+            "required": true
+          },
+          {
+            "label": "Sender auth pass",
+            "key": "pass",
+            "value": "",
+            "type": "password",
             "required": true
           },
           {
