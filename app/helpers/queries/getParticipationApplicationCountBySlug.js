@@ -1,10 +1,10 @@
-const R = require("ramda");
 const path = require("path");
 
 const variables = require("../variables");
-const ParticipationApplicationModel = require("../../models/participationApplication");
 const ContentModel = require(path.join(process.cwd(), "app/models/content"));
 const ContentHelper = require(path.join(process.cwd(), "app/controllers/contents/helpers"));
+
+const getParticipationApplicationCountById = require("./getParticipationApplicationCountById");
 
 module.exports = (slug) => {
 	return ContentHelper.getSlugQuery(slug)
@@ -19,9 +19,6 @@ module.exports = (slug) => {
 				throw { status: 404, message: "participation item not found" };
 			}
 
-			return ParticipationApplicationModel.aggregate([
-				{ $match: { "data.participation": participation._id.toString(), "meta.deleted": false } },
-				{ $group: { _id: null, count: { $sum: { $ifNull: ["$data.amount", 1] } } } },
-			]).exec().then((result) => console.log(result) || R.pathOr(0, [0, "count"])(result));
+			return getParticipationApplicationCountById(participation._id.toString());
 		});
 };

@@ -29,6 +29,8 @@ module.exports.apply = (req, res) => {
 		.then((participationId) => mappers.participationApply(req.body, participationId))
 		.then((application) => validators.userIsRegistered(application))
 		.then((result) => result.isRegistered ? Q.reject({ status: 409, message: "User already defined" }) : result.data)
+		.then((application) => validators.maxApplicationsSurpassed(application).then((isInValid) => ({ isInValid, application })))
+		.then((result) => result.isInValid ? Q.reject({ status: 412, mexsage: "Maximum allowed application surpassed" }) : result.application)
 		.then((application) => ParticipationApplication.create(application))
 		.then((application) => mailHelper.prepare.confirm(application))
 		.then((mailOptions) => mailOptions ? mailHelper.send(mailOptions.to, mailOptions.subject, mailOptions.template, mailOptions.data) : Q.when())

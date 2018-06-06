@@ -2,7 +2,8 @@ const getAllParticipations = require("./getAllParticipations");
 const getAndUpdateApplicationByRemind = require("./getAndUpdateApplicationByRemind");
 const getApplicationByEmailOrPhone = require("./getApplicationByEmailOrPhone");
 const getApplicationsByParticipationId = require("./getApplicationsByParticipationId");
-const getParticipationApplicationCount = require("./getParticipationApplicationCount");
+const getParticipationApplicationCountById = require("./getParticipationApplicationCountById");
+const getParticipationApplicationCountBySlug = require("./getParticipationApplicationCountBySlug");
 const getParticipationId = require("./getParticipationId");
 const getParticipationInfo = require("./getParticipationInfo");
 const removeApplication = require("./removeApplication");
@@ -14,7 +15,8 @@ module.exports = {
 	getAndUpdateApplicationByRemind,
 	getApplicationByEmailOrPhone,
 	getApplicationsByParticipationId,
-	getParticipationApplicationCount,
+	getParticipationApplicationCountById,
+	getParticipationApplicationCountBySlug,
 	getParticipationId,
 	getParticipationInfo,
 	removeApplication,
