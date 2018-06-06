@@ -106,7 +106,7 @@ module.exports.getParticipationApplicationCount = (req, res) => {
 		return res.status(400).json({ message: "No slug param passed" });
 	}
 
-	return queries.getParticipationApplicationCount(req.params.slug)
+	return queries.getParticipationApplicationCountBySlug(req.params.slug)
 		.then((count) => res.status(200).json({ count }))
 		.catch((error) => sendErrorResult(res, error));
 };
