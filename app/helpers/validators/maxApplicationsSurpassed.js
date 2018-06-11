@@ -6,7 +6,11 @@ module.exports = (application) => queries.getParticipationInfo(application.data.
 		const amount = application.data.amount;
 		const maxApplications = R.pathOr(false, ["fields", "maxApplications"])(participation);
 
+		if (!maxApplications) {
+			return { maxApplications };
+		}
+
 		return queries.getParticipationApplicationCountById(participation._id.toString())
 			.then((count) => ({ count, maxApplications, amount }));
 	})
-	.then((result) => !result.maxApplications || result.maxApplications <= (result.count + result.amount));
+	.then((result) => result.maxApplications && result.maxApplications <= (result.count + result.amount));
