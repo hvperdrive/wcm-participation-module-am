@@ -101,7 +101,7 @@ module.exports.confirm = (application) => {
 
 	// No email set => skip
 	if (!applicationEmail) {
-		return q.when(null);
+		return Q.when(null);
 	}
 
 	return queries.getParticipationInfo(participationId)
