@@ -1,7 +1,7 @@
 "use strict";
 
 (function(angular) {
-	angular.module("wcm-participation_0.0.23.controllers")
+	angular.module("wcm-participation_0.0.24.controllers")
 		.controller("participationsOverviewController", [
 
 			"$scope",

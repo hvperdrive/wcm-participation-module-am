@@ -58,7 +58,7 @@ const mapToMailData = (applicationEmail, participation, type, additionalData) =>
 	}
 
 	const data = R.compose(
-		R.merge(R.__, additionalData ||  {}),
+		R.merge(R.__, additionalData || {}),
 		R.curry(translator)(R.__, "nl"),
 		getParticipationFields
 	)(participation);
