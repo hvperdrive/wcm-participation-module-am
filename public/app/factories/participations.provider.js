@@ -1,7 +1,7 @@
 "use strict";
 
 (function(angular) {
-	angular.module("wcm-participation_0.0.24.factories")
+	angular.module("wcm-participation_0.0.25.factories")
 		.factory("participationsFactory", [
 
 			"$resource",
