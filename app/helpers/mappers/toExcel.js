@@ -60,12 +60,6 @@ const SPECIFICATION = {
 		cellStyle: STYLES.cell,
 		width: "20",
 	},
-	cancelOptIn: {
-		displayName: "Notify on cancel",
-		headerStyle: STYLES.header,
-		cellStyle: STYLES.cell,
-		width: "20",
-	},
 };
 
 module.exports = (applications) => R.compose(
