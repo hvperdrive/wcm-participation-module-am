@@ -82,7 +82,6 @@ module.exports = (applications) => R.compose(
 			R.pathOr("", ["data", "phone", "number"])(app) :
 			"",
 		created: R.pathOr("", ["meta", "created"])(app),
-		cancelOptIn: R.pathOr("", ["data", "optIns", "cancel"])(app) ? "true" : "false",
 		amount: "" + R.pathOr(1, ["data", "amount"])(app),
 	}))
 )(applications);

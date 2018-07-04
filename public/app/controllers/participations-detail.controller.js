@@ -48,10 +48,6 @@
 						template: "<span>{{ i.data.email || i.data.phone.number }}</span>",
 						sortable: true,
 					}, {
-						columnName: LabelService.getString("Cancel opt in"),
-						template: "<span>{{i.data.optIns.cancel ? 'true' : 'false'}}</span>",
-						sortable: true,
-					}, {
 						columnName: LabelService.getString("Reminder opt in"),
 						template: "<span>{{i.data.optIns.reminder ? 'true' : 'false'}}</span>",
 						sortable: true,
