@@ -3,6 +3,7 @@ const Q = require("q");
 const path = require("path");
 const fs = require("fs");
 const MailHelper = require("wcm-mail-helper");
+const icalGenerator = require("ical-generator");
 
 const translator = require(path.join(process.cwd(), "/app/helpers/translator"));
 const queries = require("../queries");
@@ -48,6 +49,33 @@ const getParticipationFields = R.compose(
 	R.pathOr({}, ["fields"])
 );
 
+const getParticipationEndDate = (participation) => R.pathOr(null, ["fields", "beginDate"])(participation);
+const getParticipationStartDate = (participation) => R.pathOr(null, ["fields", "endDate"])(participation);
+const getParticipationTitle = (participation)=> R.pathOr("Antwerpen Morgen event", ["fields", "title", "nl"])(participation);
+const getParticipationIntro = (participation)=> R.pathOr("", ["fields", "intro", "nl"])(participation);
+
+const getICalEvent = (participation) => ({
+	filename: "event.ics",
+	method: "PUBLISH",
+	content: icalGenerator({
+		domain: "antwerpenmorgen.be",
+		prodId: {
+			company: "Antwerpen",
+			product: "Antwerpen Morgen",
+			language: "NL",
+		},
+		name: R.pathOr("Antwerpen Morgen event", ["fields", "title", "nl"])(participation),
+		timezone: "Europe/Brussels",
+		method: "PUBLISH",
+		events: [{
+			start: getParticipationStartDate(participation),
+			end: getParticipationEndDate(participation),
+			summary: getParticipationTitle(participation),
+			description: getParticipationIntro(participation),
+		}],
+	}),
+});
+
 const mapToMailData = (applicationEmail, participation, type, additionalData) => {
 	const subject = getParticipationSubject(participation, type);
 	const template = getParticipationTemplate(participation, type);
@@ -71,6 +99,7 @@ const mapToMailData = (applicationEmail, participation, type, additionalData) =>
 		subject: result[0],
 		template: baseTemplate,
 		data: Object.assign(data, { body: result[1] }),
+		icalEvent: getICalEvent(participation),
 	}));
 };
 

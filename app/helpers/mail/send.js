@@ -1,7 +1,7 @@
 const MailHelper = require("wcm-mail-helper");
 const getVariables = require("../variables").get;
 
-module.exports = (to, subject, template, data) => {
+module.exports = ({ to, subject, template, data, icalEvent }) => {
 	const variables = getVariables();
 
 	const options = {
@@ -14,6 +14,7 @@ module.exports = (to, subject, template, data) => {
 			},
 			to,
 			subject,
+			icalEvent,
 		},
 		senderConfig: {
 			host: variables.email.variables.host,
