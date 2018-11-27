@@ -73,7 +73,7 @@ const getICalEvent = (participation) => ({
 			summary: getParticipationTitle(participation),
 			description: getParticipationIntro(participation),
 		}],
-	}),
+	}).toString(),
 });
 
 const mapToMailData = (applicationEmail, participation, type, additionalData) => {
