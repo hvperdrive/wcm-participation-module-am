@@ -1,7 +1,7 @@
 "use strict";
 
 (function(angular) {
-	angular.module("wcm-participation_0.0.27")
+	angular.module("wcm-participation_0.1.0")
 		.config([
 
 			"$stateProvider",

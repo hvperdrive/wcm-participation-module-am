@@ -34,7 +34,7 @@ module.exports.apply = (req, res) => {
 		.then((result) => result.isInValid ? Q.reject({ status: 412, mexsage: "Maximum allowed application surpassed" }) : result.application)
 		.then((application) => ParticipationApplication.create(application))
 		.then((application) => mailHelper.prepare.confirm(application))
-		.then((mailOptions) => mailOptions ? mailHelper.send(mailOptions.to, mailOptions.subject, mailOptions.template, mailOptions.data) : Q.when())
+		.then((mailOptions) => mailOptions ? mailHelper.send(mailOptions) : Q.when())
 		.then(() => res.status(200).json({ message: "Success" }))
 		.catch((error) => sendErrorResult(res, error));
 };

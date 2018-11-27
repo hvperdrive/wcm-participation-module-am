@@ -9,17 +9,18 @@ const variables = require("../variables");
 const messageQueue = [];
 let transporter = null;
 
-const createMessage = (mailData) => {
+const createMessage = ({ to, subject, template, data, icalEvent }) => {
 	const mailOptions = {
 		from: {
 			name: variables.get().email.variables.fromName || "Antwerpen Morgen",
 			address: variables.get().email.variables.address || "antwerpenmorgen@antwerpen.be",
 		},
-		to: mailData.to,
-		subject: mailData.subject,
+		to,
+		subject,
+		icalEvent,
 	};
 
-	return MailHelper.generateHtmlFromTemplate({ template: mailData.template, data: mailData.data })
+	return MailHelper.generateHtmlFromTemplate({ template, data })
 		.then((renderedTemplate) => {
 			mailOptions.html = renderedTemplate;
 
