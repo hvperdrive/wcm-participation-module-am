@@ -17,8 +17,6 @@ module.exports = () => {
 	return ContentModel.find({
 		"fields.reminderMailDateTime": { $lte: currDate.toISOString() }, // Only send reminder mails if a specific date has passed
 		"fields.endDate": { $gt: currDate.toISOString() }, // exclude participations that have ended
-		"meta.deleted": false,
-		"meta.published": true,
 		"meta.contentType": variables.get().participationId,
 	}, { _id: 1 })
 		.lean()
