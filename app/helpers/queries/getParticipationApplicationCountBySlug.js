@@ -10,8 +10,6 @@ module.exports = (slug) => {
 	return ContentHelper.getSlugQuery(slug)
 		.then((slugQuery) => Object.assign({
 			"meta.contentType": variables.get().participationId,
-			"meta.deleted": false,
-			"meta.published": true,
 		}, slugQuery))
 		.then((query) => ContentModel.findOne(query, { _id: 1 }).lean().exec())
 		.then((participation) => {
