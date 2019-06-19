@@ -12,6 +12,8 @@ module.exports = () => ParticipationApplicationModel.aggregate(
 ).exec().then((result) => ContentModel.populate(result, {
 	path: "participation",
 	match: {
+		"meta.deleted": false,
+		"meta.published": true,
 		"meta.contentType": variables.get().participationId,
 	},
 }));

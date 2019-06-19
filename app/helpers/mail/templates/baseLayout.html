@@ -29,38 +29,50 @@
 </head>
 
 <body style="font-family:sans-serif,arial;color:#5a5a5a;font-size:0.9em;margin:0;background-color:#f3f3f3;padding:45px 0;">
+	<!--[if mso]>
+		<style type="text/css">
+			body, table, td {font-family: sans-serif,arial !important;}
+		</style>
+	<![endif]-->
 	<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 		<tr>
 			<td width="15%"></td>
 			<td width="70%" style="background-color:#ffffff;padding:0;" valign="top">
 				{% if preMessage %}
-					<div id="preMessage" class="preMessage" style="padding: 25px 25px; background: #0064b4; color: #FFFFFF">
-						{{ preMessage | safe }}
-					</div>
-				{% endif %}
-				<table id="header" style="height:50px">
+				<table width="100%">
 					<tr>
-						<td style="margin:0;padding:0;">
-							<img src="https://www.antwerpenmorgen.be/style/img/a-logo.jpg" style="height:50px;width:auto;" />
-						</td>
-						<td style="margin:0;padding:0 0 0 20px;">
-							<h1>Antwerpen Morgen</h1>
+						<td color="#FFFFFF" background="#0064b4" style="padding: 25px; background: #0064b4; color: #FFFFFF">
+							{{ preMessage | safe }}
 						</td>
 					</tr>
 				</table>
-				<div id="body" class="body" style="padding:25px 25px 15px">
-					{{ body | safe }}
-				</div>
-				<div id="footer" style="padding:0 25px 25px">
-					<p translate>
-						Vriendelijke groeten,
-					</p>
-					<p translate>
-						Antwerpen Morgen
-					</p>
-				</div>
+				{% endif %}
+				<table id="header" style="height:50px;" height="50">
+					<tr>
+						<td style="margin:0;padding:0;height:50px;" height="50" margin="0" padding="0">
+							<img src="https://www.antwerpenmorgen.be/style/img/a-logo.jpg" height="50" width="auto" style="height:50px;width:auto;" />
+						</td>
+						<td style="margin:0;padding:0 0 0 20px;vertical-align:middle;" margin="0">
+							<h1>Antwerpen morgen</h1>
+						</td>
+					</tr>
+				</table>
+				<table>
+					<tr>
+						<td id="body" class="body" style="padding:25px 25px 15px">
+							{{ body | safe }}
+						</td>
+					</tr>
+				</table>
 			</td>
 			<td width="15%"></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td style="text-align: center;padding: 15px 25px;">
+				<a style="color: gray;" href="{{proclaimerUrl}}">Proclaimer</a>
+			</td>
+			<td></td>
 		</tr>
 	</table>
 </body>
