@@ -1,6 +1,6 @@
 {
   "name": "@wcm/participation-am",
-  "version": "0.0.27",
+  "version": "0.1.0",
   "description": "Participation module for Antwerpen Morgen",
   "main": "app",
   "scripts": {
