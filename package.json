@@ -1,6 +1,6 @@
 {
   "name": "@wcm/participation-am",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Participation module for Antwerpen Morgen",
   "main": "app",
   "scripts": {
@@ -111,8 +111,10 @@
   "license": "ISC",
   "dependencies": {
     "@wcm/module-helper": "1.0.0",
+    "cron": "^1.7.1",
     "eslint-plugin-chai-friendly": "^0.4.1",
     "glob": "^7.1.2",
+    "ical-generator": "^1.7.1",
     "node-excel-export": "^1.4.3",
     "path": "^0.12.7",
     "q": "^1.5.1",
