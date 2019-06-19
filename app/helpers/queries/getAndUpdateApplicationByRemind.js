@@ -31,8 +31,6 @@ module.exports = () => {
 			getTruthyQuery("fields.templateReminderEmail.nl", 2, true) // Only send reminder mails when reminder mail body is set
 		),
 		"fields.endDate": { $gt: currDate.toISOString() }, // exclude participations that have ended
-		"meta.deleted": false,
-		"meta.published": true,
 		"meta.contentType": variables.get().participationId,
 	}, { _id: 1 })
 		.lean()

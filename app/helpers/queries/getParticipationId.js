@@ -8,8 +8,6 @@ const variables = require("../variables");
 
 module.exports = (uuid) => ContentModel.findOne({
 	uuid: uuid,
-	"meta.deleted": false,
-	"meta.published": true,
 	"meta.contentType": variables.get().participationId,
 }, { "meta.contentType": 1, "_id": 1 })
 	.lean()
