@@ -1,7 +1,7 @@
 "use strict";
 
 (function(angular) {
-	angular.module("wcm-participation_0.3.1")
+	angular.module("wcm-participation_0.3.3")
 		.provider("participationsConfig", [
 
 			"MODULE_ENV_CONFIG",
@@ -10,7 +10,7 @@
 
 				this.API = {
 					name: MODULE_ENV_CONFIG.angularModule,
-					version: "0.3.1",
+					version: "0.3.3",
 					feDirPath: MODULE_ENV_CONFIG.feDirPath,
 					assetsDirPath: MODULE_ENV_CONFIG.assetsDirPath,
 					cssDirPath: MODULE_ENV_CONFIG.cssDirPath,
