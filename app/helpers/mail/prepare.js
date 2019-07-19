@@ -3,6 +3,7 @@ const Q = require("q");
 const path = require("path");
 const fs = require("fs");
 const MailHelper = require("wcm-mail-helper");
+const icalGenerator = require("ical-generator");
 
 const translator = require(path.join(process.cwd(), "/app/helpers/translator"));
 const queries = require("../queries");
@@ -48,9 +49,36 @@ const getParticipationFields = R.compose(
 	R.pathOr({}, ["fields"])
 );
 
+const getParticipationEndDate = (participation) => R.pathOr(null, ["fields", "beginDate"])(participation);
+const getParticipationStartDate = (participation) => R.pathOr(null, ["fields", "endDate"])(participation);
+const getParticipationTitle = (participation)=> R.pathOr("Antwerpen Morgen event", ["fields", "title", "nl"])(participation);
+const getParticipationIntro = (participation)=> R.pathOr("", ["fields", "intro", "nl"])(participation);
+
+const getICalEvent = (participation) => ({
+	filename: "event.ics",
+	method: "PUBLISH",
+	content: icalGenerator({
+		domain: "antwerpenmorgen.be",
+		prodId: {
+			company: "Antwerpen",
+			product: "Antwerpen Morgen",
+			language: "NL",
+		},
+		timezone: "Europe/Brussels",
+		method: "PUBLISH",
+		events: [{
+			start: getParticipationStartDate(participation),
+			end: getParticipationEndDate(participation),
+			summary: getParticipationTitle(participation),
+			description: getParticipationIntro(participation),
+		}],
+	}).toString(),
+});
+
 const mapToMailData = (applicationEmail, participation, type, additionalData) => {
 	const subject = getParticipationSubject(participation, type);
 	const template = getParticipationTemplate(participation, type);
+	const proclaimerUrl = R.path(["email", "variables", "proclaimerUrl"], variables.get());
 
 	// No template or subject set => skip
 	if (!template || !subject) {
@@ -58,6 +86,7 @@ const mapToMailData = (applicationEmail, participation, type, additionalData) =>
 	}
 
 	const data = R.compose(
+		R.merge(R.__, { proclaimerUrl }),
 		R.merge(R.__, additionalData || {}),
 		R.curry(translator)(R.__, "nl"),
 		getParticipationFields
@@ -71,11 +100,13 @@ const mapToMailData = (applicationEmail, participation, type, additionalData) =>
 		subject: result[0],
 		template: baseTemplate,
 		data: Object.assign(data, { body: result[1] }),
+		icalEvent: getICalEvent(participation),
 	}));
 };
 
 const createFinalRemindMailData = (participation) => {
 	const to = R.path(["email", "variables", "confirmEmails"], variables.get());
+	const proclaimerUrl = R.path(["email", "variables", "proclaimerUrl"], variables.get());
 
 	if (!participation || !to) {
 		return Q.when(null);
@@ -85,7 +116,10 @@ const createFinalRemindMailData = (participation) => {
 		to,
 		participation,
 		TYPE_REMIND,
-		{ preMessage: "De volgend reminder e-mail werd succesvol verstuurd naar de ingeschreven personen" }
+		{
+			preMessage: "De volgend reminder e-mail werd succesvol verstuurd naar de ingeschreven personen",
+			proclaimerUrl,
+		}
 	).then((mailData) => Object.assign({}, mailData, {
 		subject: "Reminder e-mail succesvol verzonden: " + mailData.subject,
 	}));

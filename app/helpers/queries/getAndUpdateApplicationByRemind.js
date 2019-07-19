@@ -69,7 +69,7 @@ module.exports = () => {
 			return ParticipationApplication.update({
 				"_id": { $in: ids },
 				"meta.reminded": false,
-			}, { $set: { "meta.reminded": true } })
+			}, { $set: { "meta.reminded": true } }, { multi: true })
 				.then((writeResult) => ({ writeResult, applications }));
 		})
 		// STEP 4

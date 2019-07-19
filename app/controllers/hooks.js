@@ -1,5 +1,3 @@
-"use strict";
-
 const variablesHelper = require("../helpers/variables");
 const mail = require("../helpers/mail");
 const cron = require("../helpers/cron");
