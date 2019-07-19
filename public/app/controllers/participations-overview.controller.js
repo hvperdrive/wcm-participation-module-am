@@ -5,7 +5,6 @@
 		.controller("participationsOverviewController", [
 
 			"$scope",
-			"$controller",
 			"constants",
 
 			// services
@@ -14,7 +13,7 @@
 			// Resolves
 			"ListData",
 
-			function($scope, $controller, constants, LabelService, ListData) {
+			function($scope, constants, LabelService, ListData) {
 
 				$scope.data = ListData || [];
 
