@@ -1,11 +1,10 @@
 "use strict";
 
 (function(angular) {
-	angular.module("wcm-participation_0.2.4.controllers")
+	angular.module("wcm-participation_0.3.3.controllers")
 		.controller("participationsOverviewController", [
 
 			"$scope",
-			"$controller",
 			"constants",
 
 			// services
@@ -14,7 +13,7 @@
 			// Resolves
 			"ListData",
 
-			function($scope, $controller, constants, LabelService, ListData) {
+			function($scope, constants, LabelService, ListData) {
 
 				$scope.data = ListData || [];
 
@@ -36,10 +35,12 @@
 						columnName: LabelService.getString("Begin date"),
 						template: "<span>{{i.participation.fields.beginDate | date: 'dd/MM/yyyy HH:mm'}}</span>",
 						sortable: true,
+						defaultSort: "+",
 					}, {
 						columnName: LabelService.getString("End date"),
 						template: "<span>{{i.participation.fields.endDate | date: 'dd/MM/yyyy HH:mm'}}</span>",
 						sortable: true,
+						defaultSort: false,
 					}, {
 						columnName: LabelService.getString("Applicants"),
 						key: "count",

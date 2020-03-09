@@ -1,7 +1,8 @@
-const path = require("path");
+const { join } = require("path");
+const { sort, path, descend } = require("ramda");
 
 const ParticipationApplicationModel = require("../../models/participationApplication");
-const ContentModel = require(path.join(process.cwd(), "app/models/content"));
+const ContentModel = require(join(process.cwd(), "app/models/content"));
 
 const variables = require("../variables");
 
@@ -14,5 +15,12 @@ module.exports = () => ParticipationApplicationModel.aggregate(
 	match: {
 		"meta.contentType": variables.get().participationId,
 	},
-}));
+	select: "-versions",
+})).then(
+	sort(
+		descend(
+			path(["participation", "fields", "beginDate"])
+		)
+	)
+);
 

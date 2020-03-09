@@ -9,7 +9,6 @@ const queries = require("../helpers/queries");
 const mailHelper = require("../helpers/mail");
 
 const sendErrorResult = (res, error) => {
-	console.log(error);
 	// Handle custom error
 	if (R.pathOr(false, ["status"])(error)) {
 		return res.status(error.status).json(error);
