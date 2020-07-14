@@ -75,10 +75,23 @@ const getICalEvent = (participation) => ({
 	}).toString(),
 });
 
-const mapToMailData = (applicationEmail, participation, type, additionalData) => {
+const brandingMap = {
+	"website": {
+		brandingLogo: "https://www.antwerpenmorgen.be/style/img/a-logo.jpg",
+		brandingTitle: "Antwerpen Morgen"
+	},
+	"dgv-website": {
+		brandingLogo: "https://degroteverbinding.be/style/img/dgv-logo.svg",
+		brandingTitle: "De Grote Verbinding"
+	},
+}
+
+const mapToMailData = (applicationEmail, participation, type, application, additionalData) => {
 	const subject = getParticipationSubject(participation, type);
 	const template = getParticipationTemplate(participation, type);
 	const proclaimerUrl = R.path(["email", "variables", "proclaimerUrl"], variables.get());
+	const medium = R.pathOr("website", ["meta", "medium"])(application);
+	const branding = R.prop(medium)(brandingMap);
 
 	// No template or subject set => skip
 	if (!template || !subject) {
@@ -88,6 +101,7 @@ const mapToMailData = (applicationEmail, participation, type, additionalData) =>
 	const data = R.compose(
 		R.merge(R.__, { proclaimerUrl }),
 		R.merge(R.__, additionalData || {}),
+		R.merge(R.__, branding || {}),
 		R.curry(translator)(R.__, "nl"),
 		getParticipationFields
 	)(participation);
@@ -96,6 +110,7 @@ const mapToMailData = (applicationEmail, participation, type, additionalData) =>
 		MailHelper.generateHtmlFromTemplate({ template: subject, data }),
 		MailHelper.generateHtmlFromTemplate({ template, data }),
 	]).then((result) => ({
+		medium,
 		to: applicationEmail,
 		subject: result[0],
 		template: baseTemplate,
@@ -104,7 +119,7 @@ const mapToMailData = (applicationEmail, participation, type, additionalData) =>
 	}));
 };
 
-const createFinalRemindMailData = (participation) => {
+const createFinalRemindMailData = (participation, application) => {
 	const to = R.path(["email", "variables", "confirmEmails"], variables.get());
 	const proclaimerUrl = R.path(["email", "variables", "proclaimerUrl"], variables.get());
 
@@ -116,6 +131,7 @@ const createFinalRemindMailData = (participation) => {
 		to,
 		participation,
 		TYPE_REMIND,
+		application,
 		{
 			preMessage: "De volgend reminder e-mail werd succesvol verstuurd naar de ingeschreven personen",
 			proclaimerUrl,
@@ -139,7 +155,7 @@ module.exports.confirm = (application) => {
 	}
 
 	return queries.getParticipationInfo(participationId)
-		.then((participation) => mapToMailData(applicationEmail, participation, TYPE_CONFIRM));
+		.then((participation) => mapToMailData(applicationEmail, participation, TYPE_CONFIRM, application));
 };
 
 module.exports.remind = (application, participation) => {
@@ -154,13 +170,13 @@ module.exports.remind = (application, participation) => {
 		return Q.when(null);
 	}
 
-	return mapToMailData(applicationEmail, participation, TYPE_REMIND);
+	return mapToMailData(applicationEmail, participation, TYPE_REMIND, application);
 };
 
-module.exports.remindConfirm = (participation) => {
+module.exports.remindConfirm = (participation, application) => {
 	if (!participation) {
 		throw { status: 500, msg: "Invalid application before sending remind confirm mail" };
 	}
 
-	return createFinalRemindMailData(participation);
+	return createFinalRemindMailData(participation, application);
 };

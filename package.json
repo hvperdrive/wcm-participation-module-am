@@ -102,6 +102,20 @@
             "value": "antwerpenmorgen@antwerpen.be",
             "type": "text",
             "required": true
+          },
+          {
+            "label": "[DGV] Visible from name",
+            "key": "dgvFromName",
+            "value": "De Grote Verbinding",
+            "type": "text",
+            "required": true
+          },
+          {
+            "label": "[DGV] Visible from email address",
+            "key": "dgvAddress",
+            "value": "dgv@antwerpen.be",
+            "type": "text",
+            "required": true
           }
         ]
       }
