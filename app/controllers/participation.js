@@ -26,7 +26,7 @@ module.exports.apply = (req, res) => {
 	// Check if participation uuid is valid and get _id
 	return queries.getParticipationId(req.body.participationUuid)
 		// Map the body to a valid participationApplication model
-		.then((participationId) => mappers.participationApply(req.body, participationId))
+		.then((participationId) => mappers.participationApply(req.body, participationId, req.query.medium || "website"))
 		.then((application) => validators.userIsRegistered(application))
 		.then((result) => result.isRegistered ? Q.reject({ status: 409, message: "User already defined" }) : result.data)
 		.then((application) => validators.maxApplicationsSurpassed(application).then((isInValid) => ({ isInValid, application })))

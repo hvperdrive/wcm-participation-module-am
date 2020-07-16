@@ -59,6 +59,10 @@ const ParticipationApplicationsSchema = new Schema({
 			type: Boolean,
 			default: false,
 		},
+		medium: {
+			type: String,
+			default: "website",
+		},
 		reminded: {
 			type: Boolean,
 			default: false,

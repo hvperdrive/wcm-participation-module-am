@@ -1,6 +1,6 @@
 const R = require("ramda");
 
-module.exports = (body, participationId) => {
+module.exports = (body, participationId, medium) => {
 	const pathOrFromBody = (fallback, path) => R.pathOr(fallback, path, body);
 
 	return {
@@ -15,6 +15,8 @@ module.exports = (body, participationId) => {
 				cancel: pathOrFromBody(false, ["cancelOptIn"]),
 			},
 		},
-		meta: {},
+		meta: {
+			medium
+		},
 	};
 };
