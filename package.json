@@ -90,6 +90,13 @@
             "required": true
           },
           {
+            "label": "Proclaimer URL",
+            "key": "proclaimerUrl",
+            "value": "",
+            "type": "text",
+            "required": true
+          },
+          {
             "label": "Visible from name",
             "key": "fromName",
             "value": "Antwerpen Morgen",
