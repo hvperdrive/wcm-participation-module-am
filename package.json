@@ -90,23 +90,30 @@
             "required": true
           },
           {
-            "label": "Proclaimer URL",
+            "label": "[AM] Proclaimer URL",
             "key": "proclaimerUrl",
             "value": "",
             "type": "text",
             "required": true
           },
           {
-            "label": "Visible from name",
+            "label": "[AM] Visible from name",
             "key": "fromName",
             "value": "Antwerpen Morgen",
             "type": "text",
             "required": true
           },
           {
-            "label": "Visible from email address",
+            "label": "[AM] Visible from email address",
             "key": "address",
             "value": "antwerpenmorgen@antwerpen.be",
+            "type": "text",
+            "required": true
+          },
+          {
+            "label": "[DGV] Proclaimer URL",
+            "key": "dgvProclaimerUrl",
+            "value": "",
             "type": "text",
             "required": true
           },
