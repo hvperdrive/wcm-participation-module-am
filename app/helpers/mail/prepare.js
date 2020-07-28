@@ -89,8 +89,8 @@ const brandingMap = {
 const mapToMailData = (applicationEmail, participation, type, application, additionalData) => {
 	const subject = getParticipationSubject(participation, type);
 	const template = getParticipationTemplate(participation, type);
-	const proclaimerUrl = R.path(["email", "variables", "proclaimerUrl"], variables.get());
 	const medium = R.pathOr("website", ["meta", "medium"])(application);
+	const proclaimerUrl = R.path(["email", "variables", medium === "website" ? "proclaimerUrl" : "dgvProclaimerUrl"], variables.get());
 	const branding = R.prop(medium)(brandingMap);
 
 	// No template or subject set => skip
