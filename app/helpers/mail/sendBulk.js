@@ -9,8 +9,10 @@ const variables = require("../variables");
 const messageQueue = [];
 let transporter = null;
 
-const createMessage = ({ to, subject, template, data, icalEvent, medium }) => {
+const createMessage = ({ to, subject, template, data, icalEvent }) => {
 	const variables = getVariables();
+	const medium = R.pathOr("website", ["meta", "medium"])(data);
+
 	let from = {
 		name: variables.email.variables.fromName || "Antwerpen Morgen",
 		address: variables.email.variables.address || "antwerpenmorgen@antwerpen.be",
