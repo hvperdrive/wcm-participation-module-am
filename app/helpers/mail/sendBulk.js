@@ -9,7 +9,7 @@ const variables = require("../variables");
 const messageQueue = [];
 let transporter = null;
 
-const createMessage = ({ to, subject, template, data, medium, icalEvent }) => {
+const createMessage = ({ to, subject, template, data, icalEvent, medium }) => {
 	const variables = getVariables();
 
 	let from = {
