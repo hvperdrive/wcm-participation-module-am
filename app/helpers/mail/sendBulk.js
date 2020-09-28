@@ -9,7 +9,7 @@ const variables = require("../variables");
 const messageQueue = [];
 let transporter = null;
 
-const createMessage = ({ to, subject, template, data, meta, icalEvent }) => {
+const createMessage = ({ to, subject, template, data, medium, icalEvent }) => {
 	const variables = getVariables();
 	const medium = R.pathOr("website", ["medium"])(meta);
 
