@@ -11,7 +11,6 @@ let transporter = null;
 
 const createMessage = ({ to, subject, template, data, medium, icalEvent }) => {
 	const variables = getVariables();
-	const medium = R.pathOr("website", ["medium"])(meta);
 
 	let from = {
 		name: variables.email.variables.fromName || "Antwerpen Morgen",
