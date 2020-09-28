@@ -121,7 +121,9 @@ const mapToMailData = (applicationEmail, participation, type, application, addit
 
 const createFinalRemindMailData = (participation, application) => {
 	const to = R.path(["email", "variables", "confirmEmails"], variables.get());
-	const proclaimerUrl = R.path(["email", "variables", "proclaimerUrl"], variables.get());
+	const medium = R.pathOr("website", ["meta", "medium"])(application);
+	const proclaimerUrl = R.path(["email", "variables", medium === "website" ? "proclaimerUrl" : "dgvProclaimerUrl"], variables.get());
+	const branding = R.prop(medium)(brandingMap);
 
 	if (!participation || !to) {
 		return Q.when(null);
@@ -135,6 +137,7 @@ const createFinalRemindMailData = (participation, application) => {
 		{
 			preMessage: "De volgend reminder e-mail werd succesvol verstuurd naar de ingeschreven personen",
 			proclaimerUrl,
+			branding,
 		}
 	).then((mailData) => Object.assign({}, mailData, {
 		subject: "Reminder e-mail succesvol verzonden: " + mailData.subject,
