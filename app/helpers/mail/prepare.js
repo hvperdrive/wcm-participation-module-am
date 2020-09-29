@@ -110,12 +110,12 @@ const mapToMailData = (applicationEmail, participation, type, application, addit
 		MailHelper.generateHtmlFromTemplate({ template: subject, data }),
 		MailHelper.generateHtmlFromTemplate({ template, data }),
 	]).then((result) => ({
+		medium,
 		to: applicationEmail,
 		subject: result[0],
 		template: baseTemplate,
 		data: Object.assign(data, { body: result[1] }),
 		icalEvent: getICalEvent(participation),
-		medium,
 	}));
 };
 
