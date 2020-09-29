@@ -9,7 +9,7 @@ const variables = require("../variables");
 const messageQueue = [];
 let transporter = null;
 
-const createMessage = ({ to, subject, template, data, icalEvent, meta }) => {
+const createMessage = ({ to, subject, template, data, icalEvent }, params) => {
 	const variables = getVariables();
 
 	let from = {
@@ -17,7 +17,7 @@ const createMessage = ({ to, subject, template, data, icalEvent, meta }) => {
 		address: variables.email.variables.address || "antwerpenmorgen@antwerpen.be",
 	};
 
-	if (meta && meta.medium === "dgv-website") {
+	if (params.meta && params.meta.medium === "dgv-website") {
 		from = {
 			name: variables.email.variables.dgvFromName || "De Grote Verbinding",
 			address: variables.email.variables.dgvAddress || "dgv@antwerpen.be",
