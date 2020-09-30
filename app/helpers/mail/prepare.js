@@ -119,9 +119,12 @@ const mapToMailData = (applicationEmail, participation, type, application, addit
 	}));
 };
 
-const createFinalRemindMailData = (participation, application) => {
+const createFinalRemindMailData = (data) => {
+    const participation = R.pathOr(false, [0, "data", "participation"])(data);
+    const application = R.pathOr(false, [0])(data);
+
 	const to = R.path(["email", "variables", "confirmEmails"], variables.get());
-	const medium = R.pathOr("website", ["meta", "medium"])(application);
+    const medium = R.pathOr("website", ["meta", "medium"])(application);
 	const proclaimerUrl = R.path(["email", "variables", medium === "website" ? "proclaimerUrl" : "dgvProclaimerUrl"], variables.get());
 	const branding = R.prop(medium)(brandingMap);
 
@@ -139,7 +142,7 @@ const createFinalRemindMailData = (participation, application) => {
 			proclaimerUrl,
 			branding,
 		}
-	).then((mailData) => Object.assign({}, mailData, {
+	).then((mailData) => Object.assign({}, mailData, { medium }, {
 		subject: "Reminder e-mail succesvol verzonden: " + mailData.subject,
 	}));
 };
