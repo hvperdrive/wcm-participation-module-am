@@ -9,21 +9,20 @@ const variables = require("../variables");
 const messageQueue = [];
 let transporter = null;
 
-const createMessage = ({ to, subject, template, data, icalEvent }) => {
-	const variables = getVariables();
-
+const createMessage = ({ to, subject, template, data, icalEvent, medium }) => {
+	const vars = variables.get();
 	let from = {
-		name: variables.email.variables.fromName || "Antwerpen Morgen",
-		address: variables.email.variables.address || "antwerpenmorgen@antwerpen.be",
+		name: vars.email.variables.fromName || "Antwerpen Morgen",
+		address: vars.email.variables.address || "antwerpenmorgen@antwerpen.be",
 	};
 
-/* 	if (params.meta && params.meta.medium === "dgv-website") {
+	if (medium === "dgv-website") {
 		from = {
-			name: variables.email.variables.dgvFromName || "De Grote Verbinding",
-			address: variables.email.variables.dgvAddress || "dgv@antwerpen.be",
+			name: vars.email.variables.dgvFromName || "De Grote Verbinding",
+			address: vars.email.variables.dgvAddress || "dgv@antwerpen.be",
 		}
-	}
- */
+    }
+
 	const mailOptions = {
 		from,
 		to,
