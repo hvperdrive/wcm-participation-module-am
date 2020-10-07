@@ -81,7 +81,7 @@ const brandingMap = {
 		brandingTitle: "Antwerpen Morgen"
 	},
 	"dgv-website": {
-		brandingLogo: "https://degroteverbinding.be/style/img/dgv-logo.svg",
+		brandingLogo: "https://degroteverbinding.be/style/img/dgv-logo.png",
 		brandingTitle: "De Grote Verbinding"
 	},
 }
