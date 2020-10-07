@@ -13,8 +13,7 @@ module.exports = () => {
 				(arr) => !!arr.length,
 				R.compose(
 					(p) => promises.push(p),
-					mail.prepare.remindConfirm,
-					R.pathOr(false, [0, "data", "participation"])
+					mail.prepare.remindConfirm
 				)
 			)(applications); // Add remind confirm email to the queue
 
