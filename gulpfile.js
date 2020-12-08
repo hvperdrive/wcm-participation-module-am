@@ -17,7 +17,7 @@ gulp.task("swagger", function() {
 	});
 
 	return gulp.src(["./swagger/output/swagger.json"])
-		.pipe(replace(/\/api\/1.0.0\//g, "/"))
+		.pipe(replace(/\/api\/1.0.14\//g, "/"))
 		.pipe(gulp.dest("./swagger/output/acpaas"));
 });
 
