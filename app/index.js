@@ -12,6 +12,9 @@ module.exports = (app, hooks, moduleInfo) => {
 		.then((variables) => {
 			mail.sendBulk.initPool(variables);
 			cron.init();
+		})
+		.catch((error) => {
+			console.log('SOMETHING WENT WRONG WHEN RELOADING THE VARIABLESHELPER', error);
 		});
 
 	// Handle hooks
