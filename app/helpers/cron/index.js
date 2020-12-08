@@ -11,6 +11,8 @@ module.exports.init = module.exports.reset = () => {
 		job = null;
 	}
 
+	console.log('CRON TIMING BY WCM', variables.get().cron);
+
 	job = new CronJob({
 		cronTime: variables.get().cron || "* * * *", // default every hour
 		onTick: () => {
