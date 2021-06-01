@@ -19,6 +19,7 @@ const sendErrorResult = (res, error) => {
 };
 
 module.exports.apply = (req, res) => {
+	console.log(req.body)
 	if (!validators.participationApply(req.body)) {
 		return res.status(400).json({ err: "invalid body" });
 	}

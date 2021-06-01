@@ -32,7 +32,8 @@ module.exports = () => {
 		),
 		"fields.endDate": { $gt: currDate.toISOString() }, // exclude participations that have ended
 		"meta.contentType": variables.get().participationId,
-	}, { _id: 1 })
+		"meta.deleted": false,
+	}, { _id: 1, 'meta.label': 1 })
 		.lean()
 		.exec()
 		// STEP 2
