@@ -27,7 +27,7 @@ module.exports.init = module.exports.reset = () => {
 			console.log("PARTICIPATION CRON STARTED"); // eslint-disable-line no-console
 
 			return lbTaskCheckerInstance.reserve("PARTICIPATION_MAIL_REMINDER", new Date(new Date().getTime() + 10000), process.pid)
-				.then((runTask) => runTask && participationConfirm().catch((err) => console.log("ERROR CONFIRM CRON: ", err)))
+				.then((runTask) => runTask && participationConfirm().catch((err) => console.log("ERROR CONFIRM CRON: ", err))) // eslint-disable-line no-console
 		},
 		onComplete: () => console.log("PARTICIPATION CRON FINISHED"), // eslint-disable-line no-console
 		timeZone: "Europe/Brussels",
