@@ -8,7 +8,11 @@ const variables = require("../variables");
 
 module.exports = (id) => ContentModel.findOne({
 	_id: id,
-	"meta.contentType": variables.get().participationId,
+	"meta.contentType": { $in: [
+		variables.get().participationId,
+		variables.get().activityId,
+		variables.get().wedstrijdId,
+	] },
 }, { "versions": 0 })
 	.lean()
 	.exec()

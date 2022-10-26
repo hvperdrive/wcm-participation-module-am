@@ -41,6 +41,20 @@
         "type": "text"
       },
       {
+        "label": "Activity _id",
+        "key": "activityId",
+        "value": "",
+        "required": true,
+        "type": "text"
+      },
+      {
+        "label": "Wedstrijd _id",
+        "key": "wedstrijdId",
+        "value": "",
+        "required": true,
+        "type": "text"
+      },
+      {
         "label": "Cron time",
         "key": "cron",
         "value": "",
