@@ -60,6 +60,10 @@
 						template: "<span>{{i.meta.created | date: 'dd/MM/yyyy HH:mm'}}</span>",
 						sortable: true,
 					}, {
+						columnName: LabelService.getString("ApplicationTimeslot"),
+						template: "data.applicationTimeslot",
+						sortable: true,
+					}, {
 						columnName: LabelService.getString("Processed"),
 						template: "<input type=\"checkbox\" ng-model=\"i.meta.checked\" ng-change=\"parent.updateCheck(i.uuid, i.meta.checked)\" />",
 						sortable: true,

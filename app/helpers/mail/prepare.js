@@ -33,8 +33,9 @@ const getParticipationTemplate = (item, type) => {
 };
 const getParticipationSubject = (item, type) => {
 	const fieldId = R.pathOr(TYPE_MAP[TYPE_CONFIRM].subject, [type, "subject"])(TYPE_MAP);
+	const applicationTimeslot = R.pathOr(false, ["fields", "applicationTimeslot", "nl"])(item);
 
-	return R.pathOr(false, ["fields", fieldId, "nl"])(item);
+	return R.pathOr(false, ["fields", fieldId, "nl"])(item) + applicationTimeslot ? " - " + applicationTimeslot : "";
 };
 const getParticipationFields = R.compose(
 	R.omit([
