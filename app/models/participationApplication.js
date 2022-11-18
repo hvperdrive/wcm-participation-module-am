@@ -20,6 +20,9 @@ const ParticipationApplicationsSchema = new Schema({
 		email: {
 			type: String,
 		},
+		applicationTimeslot: {
+			type: String,
+		},
 		name: {
 			type: String,
 			required: true,

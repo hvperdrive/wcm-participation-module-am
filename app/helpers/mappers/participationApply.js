@@ -10,6 +10,7 @@ module.exports = (body, participationId, medium) => {
 			phone: pathOrFromBody("", ["tel"]),
 			amount: pathOrFromBody(1, ["amount"]),
 			name: pathOrFromBody("", ["name"]),
+			applicationTimeslot: pathOrFromBody("", ["applicationTimeslot"]),
 			optIns: {
 				reminder: pathOrFromBody(false, ["reminderOptIn"]),
 				cancel: pathOrFromBody(false, ["cancelOptIn"]),

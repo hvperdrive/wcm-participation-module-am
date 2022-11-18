@@ -60,6 +60,12 @@ const SPECIFICATION = {
 		cellStyle: STYLES.cell,
 		width: "20",
 	},
+	applicationTimeslot: {
+		displayName: "ApplicationTimeslot",
+		headerStyle: STYLES.header,
+		cellStyle: STYLES.cell,
+		width: "50",
+	},
 };
 
 module.exports = (applications) => R.compose(
@@ -77,5 +83,6 @@ module.exports = (applications) => R.compose(
 			"",
 		created: R.pathOr("", ["meta", "created"])(app),
 		amount: "" + R.pathOr(1, ["data", "amount"])(app),
+		applicationTimeslot: R.pathOr("", ["data", "applicationTimeslot"])(app),
 	}))
 )(applications);
