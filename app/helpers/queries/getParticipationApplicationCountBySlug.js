@@ -9,7 +9,11 @@ const getParticipationApplicationCountById = require("./getParticipationApplicat
 module.exports = (slug) => {
 	return ContentHelper.getSlugQuery(slug)
 		.then((slugQuery) => Object.assign({
-			"meta.contentType": variables.get().participationId,
+			"meta.contentType": { $in: [
+				variables.get().participationId,
+				variables.get().activityId,
+				variables.get().wedstrijdId,
+			] },
 		}, slugQuery))
 		.then((query) => ContentModel.findOne(query, { _id: 1 }).lean().exec())
 		.then((participation) => {

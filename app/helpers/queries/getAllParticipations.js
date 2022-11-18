@@ -13,7 +13,11 @@ module.exports = () => ParticipationApplicationModel.aggregate(
 ).exec().then((result) => ContentModel.populate(result, {
 	path: "participation",
 	match: {
-		"meta.contentType": variables.get().participationId,
+		"meta.contentType": { $in: [
+			variables.get().participationId,
+			variables.get().activityId,
+			variables.get().wedstrijdId,
+		] },
 	},
 	select: "-versions",
 })).then(
