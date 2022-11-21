@@ -61,7 +61,7 @@
 						sortable: true,
 					}, {
 						columnName: LabelService.getString("ApplicationTimeslot"),
-						template: "data.applicationTimeslot",
+						key: "data.applicationTimeslot",
 						sortable: true,
 					}, {
 						columnName: LabelService.getString("Processed"),
