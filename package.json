@@ -55,8 +55,22 @@
         "type": "text"
       },
       {
-        "label": "Cron time",
+        "label": "Remove Expired Enabled",
+        "key": "removeExpiredEnabled",
+        "value": false,
+        "required": false,
+        "type": "checkbox"
+      },
+      {
+        "label": "Reminder Mail Cron time",
         "key": "cron",
+        "value": "",
+        "required": true,
+        "type": "text"
+      },
+      {
+        "label": "Remove Expired Cron time",
+        "key": "removeExpiredCron",
         "value": "",
         "required": true,
         "type": "text"
