@@ -2,7 +2,7 @@
 
 const ParticipationApplication = require("../../models/participationApplication");
 
-module.exports = (ids) => ParticipationApplication.find({
+module.exports = (ids) => ParticipationApplication.deleteMany({
 	"data.participation": { $in: ids },
-}).lean().exec();
+}).exec();
 

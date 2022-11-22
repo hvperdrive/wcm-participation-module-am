@@ -27,12 +27,12 @@ module.exports.init = module.exports.reset = () => {
 		reminderMailJob = null;
 	}
 
-	if (reminderMailJob) {
-		reminderMailJob.stop();
-		reminderMailJob = null;
+	if (deleteExpiredJob) {
+		deleteExpiredJob.stop();
+		deleteExpiredJob = null;
 	}
 
-	console.log('CRON TIMING BY WCM', variables.get().cron);
+    console.log('RESET PARTICIPATION CRON', variables.get())
 
 	reminderMailJob = new CronJob({
 		cronTime: variables.get().cron || "0 * * * *", // default every hour
@@ -49,7 +49,7 @@ module.exports.init = module.exports.reset = () => {
 	reminderMailJob.start();
 
 	deleteExpiredJob = new CronJob({
-		cronTime: "*/10 * * * * *", // default every hour
+		cronTime: variables.get().removeExpired.variables.removeExpiredCron || "*/10 * * * * *", // default every hour
 		onTick: () => {
 			console.log("PARTICIPATION_DELETE_EXPIRED CRON STARTED"); // eslint-disable-line no-console
 
@@ -60,7 +60,9 @@ module.exports.init = module.exports.reset = () => {
 		timeZone: "Europe/Brussels",
 	});
 
-	deleteExpiredJob.start();
+    if (variables.get().removeExpired.enabled) {
+        deleteExpiredJob.start();
+    }
 };
 
 module.exports.stop = () => {
