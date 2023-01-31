@@ -1,6 +1,6 @@
 {
   "name": "@wcm/participation-am",
-  "version": "1.1.1",
+  "version": "1.1.7",
   "description": "Participation module for Antwerpen Morgen",
   "main": "app",
   "scripts": {
@@ -55,11 +55,19 @@
         "type": "text"
       },
       {
-        "label": "Cron time",
-        "key": "cron",
-        "value": "",
-        "required": true,
-        "type": "text"
+        "group": "Remove Expired",
+        "key": "removeExpired",
+        "accordion": true,
+        "enabled": true,
+        "variables": [
+          {
+            "label": "Remove Expired Cron time",
+            "key": "removeExpiredCron",
+            "value": "",
+            "required": true,
+            "type": "text"
+          }
+        ]
       },
       {
         "group": "Email",

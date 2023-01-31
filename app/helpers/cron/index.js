@@ -2,6 +2,7 @@ const CronJob = require("cron").CronJob;
 
 const variables = require("../variables");
 const participationConfirm = require("./participationConfirm");
+const deleteExpiredApplications = require("./deleteExpiredApplications");
 const LbTaskChecker = require("@wcm/lb-task-checker");
 
 const lbTaskCheckerInstance = new LbTaskChecker();
@@ -11,18 +12,30 @@ lbTaskCheckerInstance.registerTask({
     instance: process.pid
 });
 
-let job = null;
+lbTaskCheckerInstance.registerTask({
+    key: "PARTICIPATION_DELETE_EXPIRED",
+    instance: process.pid
+});
+
+
+let reminderMailJob = null;
+let deleteExpiredJob = null;
 
 module.exports.init = module.exports.reset = () => {
-	if (job) {
-		job.stop();
-		job = null;
+	if (reminderMailJob) {
+		reminderMailJob.stop();
+		reminderMailJob = null;
 	}
 
-	console.log('CRON TIMING BY WCM', variables.get().cron);
+	if (deleteExpiredJob) {
+		deleteExpiredJob.stop();
+		deleteExpiredJob = null;
+	}
 
-	job = new CronJob({
-		cronTime: variables.get().cron || "* * * *", // default every hour
+    console.log('RESET PARTICIPATION CRON', variables.get())
+
+	reminderMailJob = new CronJob({
+		cronTime: variables.get().cron || "0 * * * *", // default every hour
 		onTick: () => {
 			console.log("PARTICIPATION CRON STARTED"); // eslint-disable-line no-console
 
@@ -33,13 +46,29 @@ module.exports.init = module.exports.reset = () => {
 		timeZone: "Europe/Brussels",
 	});
 
-	job.start();
+	reminderMailJob.start();
+
+	deleteExpiredJob = new CronJob({
+		cronTime: variables.get().removeExpired.variables.removeExpiredCron || "*/10 * * * * *", // default every hour
+		onTick: () => {
+			console.log("PARTICIPATION_DELETE_EXPIRED CRON STARTED"); // eslint-disable-line no-console
+
+			return lbTaskCheckerInstance.reserve("PARTICIPATION_DELETE_EXPIRED", new Date(new Date().getTime() + 10000), process.pid)
+				.then((runTask) => runTask && deleteExpiredApplications().catch((err) => console.log("ERROR PARTICIPATION_DELETE_EXPIRED CRON: ", err))) // eslint-disable-line no-console
+		},
+		onComplete: () => console.log("PARTICIPATION_DELETE_EXPIRED CRON FINISHED"), // eslint-disable-line no-console
+		timeZone: "Europe/Brussels",
+	});
+
+    if (variables.get().removeExpired.enabled) {
+        deleteExpiredJob.start();
+    }
 };
 
 module.exports.stop = () => {
-	if (!job) {
+	if (!reminderMailJob) {
 		return;
 	}
 
-	job.stop();
+	reminderMailJob.stop();
 };

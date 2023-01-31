@@ -9,6 +9,8 @@ const getParticipationInfo = require("./getParticipationInfo");
 const removeApplication = require("./removeApplication");
 const setParticipationsRemindedProperty = require("./setParticipationsRemindedProperty");
 const toggleApplicationChecked = require("./toggleApplicationChecked");
+const getExpiredParticipations = require("./getExpiredParticipations");
+const removeApplicationsByParticipationIds = require("./removeApplicationsByParticipationIds");
 
 module.exports = {
 	getAllParticipations,
@@ -22,4 +24,6 @@ module.exports = {
 	removeApplication,
 	setParticipationsRemindedProperty,
 	toggleApplicationChecked,
+    getExpiredParticipations,
+    removeApplicationsByParticipationIds
 };
