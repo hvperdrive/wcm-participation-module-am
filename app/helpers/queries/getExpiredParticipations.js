@@ -16,7 +16,6 @@ module.exports = () => {
             variables.get().activityId,
             variables.get().wedstrijdId,
         ] },
-        "meta.published": true,
         "meta.deleted": false,
         $or: [
             {

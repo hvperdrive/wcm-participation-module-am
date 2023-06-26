@@ -33,7 +33,9 @@ const getParticipationTemplate = (item, type) => {
 };
 const getParticipationSubject = (item, type) => {
 	const fieldId = R.pathOr(TYPE_MAP[TYPE_CONFIRM].subject, [type, "subject"])(TYPE_MAP);
-	const applicationTimeslot = R.pathOr(false, ["fields", "applicationTimeslot", "nl"])(item);
+	const applicationTimeslot = R.pathOr(false, ["data", "applicationTimeslot"])(application);
+
+	console.log('SUBJECT ITEM: ', item);
 
 	return R.pathOr(false, ["fields", fieldId, "nl"])(item) + applicationTimeslot ? " - " + applicationTimeslot : "";
 };
@@ -88,7 +90,7 @@ const brandingMap = {
 };
 
 const mapToMailData = (applicationEmail, participation, type, application, additionalData) => {
-	const subject = getParticipationSubject(participation, type);
+	const subject = getParticipationSubject(participation, type, application);
 	const template = getParticipationTemplate(participation, type);
 	const medium = R.pathOr("website", ["meta", "medium"])(application);
 	const proclaimerUrl = R.path(["email", "variables", medium === "website" ? "proclaimerUrl" : "dgvProclaimerUrl"], variables.get());
